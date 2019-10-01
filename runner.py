@@ -9,8 +9,8 @@ def index():
     if request.method == 'POST':
         # TODO STUFF
         try:        
-            # FOR POSTING DRAWN NUMBER
-            # POST IT, COMPUTE, RETURN TO INDEX PAGE
+            # Use this space in future to post the drawn number
+            # Post it, compare, return to index.html
             return redirect('/')
         # Error Handling
         except: 
@@ -18,7 +18,7 @@ def index():
             return 'Issue with your number submission'
     else:
         # Base Page
-        return render_template('index.html')
+        return render_template('layouts/index.html')
 
 if __name__ == "__main__":
     # If theres any errors they'll pop up on the page
