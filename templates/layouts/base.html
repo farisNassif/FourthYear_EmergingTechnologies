@@ -4,20 +4,15 @@
   <head>
     {% block head %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="/static/js/script.js"></script>
-    <title>{% block title %}{% endblock %} Emerging Technologies 2019</title>
+    <script src="/static/js/canvas.js"></script>
+    <title>{% block title %} Emerging Technologies 2019 {% endblock %} </title>
     {% endblock %}
   </head>
   <body>
     </div>
     <div id="content" class="container main-container">
     {% block content %}{% endblock %}</div>
-    <div id="footer" class="container text-center">
-      {% block footer %}
-      <i>Draw a number on the canvas and help the machine learn</i>
-      {% endblock %}
-    </div>
   </body>
 </html>

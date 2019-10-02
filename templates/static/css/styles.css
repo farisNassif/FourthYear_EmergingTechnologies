@@ -1,9 +1,6 @@
 .btn{
     background-color: rgb(100,150,255);
 }
-#inputCanvas{
+#canvasBorder{
     border: 2px solid rgb(100,150,255);
-}
-#footer{
-    margin-top: 100px;
 }

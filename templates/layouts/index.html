@@ -2,14 +2,16 @@
 {% extends 'layouts/base.html' %}
 
 {% block head %}
+<!-- Super() being base.html, referenced above -->
   {{ super() }}
 {% endblock %}
 
 {% block content %}
 <div class="row text-center">
     <h1>{{ title }}</h1>
+    <canvas id="canvasBorder" width="200" height="200"></canvas>
   </div>
-  <br/><br/>
+  <br/>
   <div class="row text-center">
     <button id="clearButton">Clear Canvas</button>
     <button id="publishButton">Publish</button>
