@@ -12,7 +12,7 @@ def index():
         # TODO STUFF
         try:        
             # Use this space in future to post the drawn number
-            # Post it, compare, return to in
+            # Post it, compare, return to index
             return redirect('/')
         # Error Handling
         except: 
