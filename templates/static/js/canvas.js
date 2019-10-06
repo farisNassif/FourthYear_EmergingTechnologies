@@ -6,9 +6,9 @@ $( document ).ready(function() {
     var canvas = document.getElementById("canvasBorder");
     canvas.context = canvas.getContext('2d');
     return canvas;
-   }
-   // Main drawing function
-   function init(container, width, height, fillColor) {
+  }
+  // Main drawing function
+  function init(container, width, height, fillColor) {
     var canvas = createCanvas(container, width, height);
     var ctx = canvas.context;
     // Draw Circle, called when mouse is moving
@@ -45,4 +45,16 @@ $( document ).ready(function() {
   // Initializing the canvas so it may be passed to the initialization function 
   var container = document.getElementById('canvas');
   init(container, 200, 200, '#ddd');
+
+  // Clear the canvas, given the paramaters of the drawable area
+  function clearCanvas() {
+    var canvas = document.getElementById("canvasBorder");
+    var ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+  // Binding for the ClearButton in index.html
+  $( "#clearButton" ).click(function(){
+    clearCanvas();
+  });
+  // *TODO* Binding for the PublishButton in index.html
 });
