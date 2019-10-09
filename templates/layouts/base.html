@@ -3,9 +3,13 @@
 <html lang="en">
   <head>
     {% block head %}
+    <!-- Bootstrapping any pages inheriting this page via the super() call; layout is a lot nicer with this addition -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- CSS file reference, need to include this for the canvas to have a border and other design features -->
     <link rel="stylesheet" href="/static/css/styles.css">
+    <!-- JQuery reference, required for actually drawing on the canvas -->
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <!-- Need to reference the javascript file here in base.html-->
     <script src="/static/js/canvas.js"></script>
     <title>{% block title %} Emerging Technologies 2019 {% endblock %} </title>
     {% endblock %}

@@ -1,3 +1,6 @@
+// This file is referenced in the HTML files and called in order for the canvas to be drawn on and display
+// Adapted from https://www.jitsejan.com/python-and-javascript-in-flask.html
+
 $( document ).ready(function() {
 
   // Canvas creation method, creates canvas object

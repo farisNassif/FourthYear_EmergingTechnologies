@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request
 import os
 
+# Having some issues with tensorflow and its depriciated packages
+
 app = Flask(__name__)
 app._static_folder = os.path.abspath("templates/static/")
 
