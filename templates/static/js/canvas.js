@@ -64,5 +64,4 @@ $( document ).ready(function() {
   $( "#publishButton" ).click(function(){
     console.log("number published!");
   });
-  // *TODO* Binding for the PublishButton in index.html
 });
