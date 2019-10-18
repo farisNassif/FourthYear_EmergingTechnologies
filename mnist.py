@@ -19,10 +19,12 @@ class_names = ['zero','one', 'two', 'three', 'four', 'five',
                'six', 'seven', 'eight', 'nine']
 
 # Plotting the first image and showing it
+'''
 plt.figure()
 plt.imshow(train_images[0])
 plt.grid(False)
 plt.show()
+'''
 
 # The images in the training set fall in the 0-255 value range
 # Will have to scale the values to a range of 0 to 1 before feeding them to the neural network model
@@ -32,15 +34,17 @@ test_images = test_images / 255.0
 
 # Verifying the data is in the correct format, displaying the first 25 images from the *training* set
 # And also display their class name below for validation
+'''
 plt.figure(figsize=(10,10))
 for i in range(25):
     plt.subplot(5,5,i+1)
     # Getting rid of the annoying ticks coming out of each
     plt.xticks([])
     plt.yticks([])
-    plt.imshow(train_images[i], cmap=plt.cm)
+    plt.imshow(train_images[i], cmap=plt.cm.binary)
     plt.xlabel(class_names[train_labels[i]])
 plt.show()
+'''
 
 model = keras.Sequential([
     # First Layer - Transforms the image formats from a 2D array (of 28 x 28px) to a 1D array (of 28 x 28px)
@@ -68,3 +72,23 @@ model.compile(optimizer='adam',
 # 2) The model learns association between the images and labels
 # 3) Ask the model to make predictions about a test set. Verify the predictions match the labls from the test_labels array
 model.fit(train_images, train_labels, epochs=10)
+
+# Compare how the model performs on the test dataset
+test_loss, test_acc = model.evaluate(test_images,  test_labels, verbose=2)
+
+print('\nTest accuracy:', test_acc)
+
+# Now with the model trained, can use it to make predictions on some images
+
+# The model should have predicted the label for each image in the training set
+predictions = model.predict(test_images)
+
+print(predictions[0])
+
+# Can't gauge much from that output, but the array index[7] has the highest confidence value
+print("Prediction: ", np.argmax(predictions[0]))
+
+# The model is confident this image is a 7 (class_names[7])
+# Examining the test label should confirm this classification is correct
+
+print("Actual: ", test_labels[0])
