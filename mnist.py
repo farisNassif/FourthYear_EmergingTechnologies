@@ -15,18 +15,8 @@ numbers_mnist = tf.keras.datasets.mnist
 # Train the images in the dataset
 (train_images, train_labels), (test_images, test_labels) = numbers_mnist.load_data()
 
-
 class_names = ['zero','one', 'two', 'three', 'four', 'five',
                'six', 'seven', 'eight', 'nine']
-
-# Should return (60000, 28, 28), 60000 being the amount of images and the images being 28x28px
-# print(train_images.shape)
-
-# Each label is an integer between 1 and 9
-# print (train_labels)
-
-# Should return (10000, 28, 28), 10000 test images being 28x28px
-# print(test_images.shape)
 
 # Plotting the first image and showing it
 plt.figure()
@@ -48,7 +38,7 @@ for i in range(25):
     # Getting rid of the annoying ticks coming out of each
     plt.xticks([])
     plt.yticks([])
-    plt.imshow(train_images[i], cmap=plt.cm.binary)
+    plt.imshow(train_images[i], cmap=plt.cm)
     plt.xlabel(class_names[train_labels[i]])
 plt.show()
 
@@ -62,3 +52,19 @@ model = keras.Sequential([
     # Each node contains a score that indicates the probability that the current image belongs to one of the 10 classes
     keras.layers.Dense(10, activation='softmax')
 ])
+
+# Before the model can be trained it needs some more settings
+# Optimizer -> How the model is updated based on the data it sees and its loss function.
+model.compile(optimizer='adam',
+# Loss function -> Measures how accurate the model is during training
+              loss='sparse_categorical_crossentropy',
+# Metrics -> Used to monitor the training and testing steps
+              metrics=['accuracy'])
+
+# Train the model
+
+# Training it requires 
+# 1) Feeding the model with the trained_images and trained_labels
+# 2) The model learns association between the images and labels
+# 3) Ask the model to make predictions about a test set. Verify the predictions match the labls from the test_labels array
+model.fit(train_images, train_labels, epochs=10)
