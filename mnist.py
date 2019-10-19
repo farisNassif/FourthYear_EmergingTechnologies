@@ -71,7 +71,7 @@ model.compile(optimizer='adam',
 # 1) Feeding the model with the trained_images and trained_labels
 # 2) The model learns association between the images and labels
 # 3) Ask the model to make predictions about a test set. Verify the predictions match the labls from the test_labels array
-model.fit(train_images, train_labels, epochs=10)
+model.fit(train_images, train_labels, epochs=1)
 
 # Compare how the model performs on the test dataset
 test_loss, test_acc = model.evaluate(test_images,  test_labels, verbose=2)
@@ -92,3 +92,5 @@ print("Prediction: ", np.argmax(predictions[0]))
 # Examining the test label should confirm this classification is correct
 
 print("Actual: ", test_labels[0])
+
+# Graphing it to look at the full set of 10 class predictions
