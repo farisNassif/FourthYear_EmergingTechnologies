@@ -8,7 +8,7 @@ from tensorflow import keras
 # Helper libraries
 import numpy as np
 import matplotlib.pyplot as plt
-
+import matplotlib.image as mpimg
 # Import the fashion dataset
 numbers_mnist = tf.keras.datasets.mnist
 
@@ -93,6 +93,7 @@ print("Prediction: ", np.argmax(predictions[0]))
 
 print("Actual: ", test_labels[0])
 
+
 # Graphing it to look at the full set of 10 class predictions
 
 def plot_image(i, predictions_array, true_label, img):
@@ -136,6 +137,12 @@ plt.subplot(1,2,2)
 plot_value_array(i, predictions[i],  test_labels)
 plt.show()
 
+img = 'testpredict2.png'
+
+imaghue=mpimg.imread(img)
+imgplot = plt.imshow(imaghue)
+
+plt.show()
 # Plot the first X test images, their predicted labels, and the true labels.
 num_rows = 5
 num_cols = 3
@@ -148,3 +155,5 @@ for i in range(num_images):
   plot_value_array(i, predictions[i], test_labels)
 plt.tight_layout()
 plt.show()
+
+
