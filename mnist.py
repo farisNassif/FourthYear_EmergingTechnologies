@@ -48,11 +48,9 @@ model.compile(optimizer='adam',
 # Loss function -> Measures how accurate the model is during training
               loss='sparse_categorical_crossentropy',
 # Metrics -> Used to monitor the training and testing steps
-              metrics=['accuracy'],)
+              metrics=['accuracy'])
 
-# Train the model
-
-# Training it requires 
+# Train the model. Training it requires..
 # 1) Feeding the model with the trained_images and trained_labels
 # 2) The model learns association between the images and labels
 # 3) Ask the model to make predictions about a test set. Verify the predictions match the labls from the test_labels array
