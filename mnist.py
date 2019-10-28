@@ -60,13 +60,13 @@ model = keras.Sequential()
 
 model.add(keras.layers.Conv2D(32, kernel_size=(3, 3),
                  activation='relu', input_shape=input_shape))
+model.add(keras.layers.MaxPooling2D(pool_size=(2, 2))) # Max pooling operation for spatial data                 
 model.add(keras.layers.Conv2D(64, (3, 3), activation='relu'))
-model.add(keras.layers.MaxPooling2D(pool_size=(2, 2))) # Max pooling operation for spatial data
-model.add(keras.layers.Dropout(0.25))
+model.add(keras.layers.MaxPooling2D(pool_size=(2, 2))) # Max pooling operation for spatial data  
 model.add(keras.layers.Flatten())  # Flattens the 2D arrays for fully connected layers
 model.add(keras.layers.Dense(128, activation='relu'))
-model.add(keras.layers.Dropout(0.5)) # Dropout randomly setting a fraction rate of input units to 0 at each update during training time, helps prevent overfitting
 model.add(keras.layers.Dense(CONST_NUM_CLASSES, activation='softmax')) # Introduces non-linearity in the model
+
 model.compile(loss=keras.losses.categorical_crossentropy, # Loss function -> Measures how accurate the model is during training
               optimizer='adam', # Optimizer -> How the model is updated based on the data it sees and its loss function.
               metrics=['accuracy']) # Metrics -> Used to monitor the training and testing steps
@@ -96,7 +96,7 @@ print("Prediction: ", np.argmax(predictions[0]))
 
 print("Actual: ", test_labels[0])
 
-processedImage = ip.processImage("testpredict2.png")
+processedImage = ip.processImage("testpredict8.png")
 
 predictions = model.predict(processedImage)
 print(predictions[0])

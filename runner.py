@@ -11,7 +11,7 @@ app._static_folder = os.path.abspath("templates/static/")
 def index():
     # Whenever someone wants to submit
     if request.method == 'POST':
-        # TODO STUFF
+        # TODO STUFF BELOW
         try:        
             # Use this space in future to post the drawn number
             # Post it, compare, return to index
