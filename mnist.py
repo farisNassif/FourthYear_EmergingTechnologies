@@ -9,6 +9,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 # Used for predicting local image
 import matplotlib.image as mpimg
+from PIL import Image
+from PIL import ImageOps as io
+
+# Reoccuring variables
+CONST_IMAGE_WIDTH, CONST_IMAGE_HEIGHT = 28, 28
+CONST_IMAGE_CHANNELS = 1
+CONST_NUM_CLASSES = 0
 
 # Import the dataset
 numbers_mnist = tf.keras.datasets.mnist
@@ -22,6 +29,17 @@ numbers_mnist = tf.keras.datasets.mnist
 # Must store them in this list to use later when plotting the images
 class_names = ['zero','one', 'two', 'three', 'four', 'five',
                'six', 'seven', 'eight', 'nine']
+CONST_NUM_CLASSES = len(class_names)
+
+# Manipulating the data from a 3d => 4d numpy arrays
+train_images = train_images.reshape(train_images.shape[0], CONST_IMAGE_WIDTH, CONST_IMAGE_HEIGHT, 1)
+test_images = test_images.reshape(test_images.shape[0], CONST_IMAGE_WIDTH, CONST_IMAGE_HEIGHT, 1)
+input_shape = (CONST_IMAGE_WIDTH, CONST_IMAGE_HEIGHT, 1)
+
+# Ensuring values are floats so decimal points can be used after division
+# https://stackoverflow.com/questions/48219442/use-tf-to-float-or-tf-image-convert-image-dtype-in-image-pipeline-for-cn
+train_images = train_images.astype('float32')
+test_images = test_images.astype('float32')
 
 # The images in the training set fall in the 0-255 value range
 # Will have to scale the values to a range of 0 to 1 before feeding them to the neural network model
@@ -29,32 +47,34 @@ class_names = ['zero','one', 'two', 'three', 'four', 'five',
 train_images = train_images / 255.0
 test_images = test_images / 255.0
 
-# Model Creation, model variable will be used below when compiling
-model = keras.Sequential([
-    # First Layer - Transforms the image formats from a 2D array (of 28 x 28px) to a 1D array (of 28 x 28px)
-    # This layer just reformats the data, unstacks rows of pixels and lines them up
-    keras.layers.Flatten(input_shape=(28, 28)),
-    # Second Layer - Two Dense Layers. Fully connected neural layers. The first layer has 128 neurons(nodes) 
-    keras.layers.Dense(128, activation='relu'),
-    # 10 neuron softmax layer that returns an array of 10 probability scores that sum up to 1
-    # Each node contains a score that indicates the probability that the current image belongs to one of the 10 classes
-    keras.layers.Dense(10, activation='softmax')
-])
+# Converts a class vector (integers) to binary class matrix
+# https://keras.io/utils/
+train_labels = keras.utils.to_categorical(train_labels, CONST_NUM_CLASSES)
+test_labels = keras.utils.to_categorical(test_labels, CONST_NUM_CLASSES)
+train_labels[0]
 
-# Before the model can be trained it needs some more settings
-# Optimizer -> How the model is updated based on the data it sees and its loss function.
-model.compile(optimizer='adam',
-# Loss function -> Measures how accurate the model is during training
-              loss='sparse_categorical_crossentropy',
-# Metrics -> Used to monitor the training and testing steps
-              metrics=['accuracy'])
+# Model Creation, model variable will be used below when compiling
+model = keras.Sequential()
+
+model.add(keras.layers.Conv2D(32, kernel_size=(3, 3),
+                 activation='relu', input_shape=input_shape))
+model.add(keras.layers.Conv2D(64, (3, 3), activation='relu'))
+model.add(keras.layers.MaxPooling2D(pool_size=(2, 2))) # Max pooling operation for spatial data
+model.add(keras.layers.Dropout(0.25))
+model.add(keras.layers.Flatten())  # Flattens the 2D arrays for fully connected layers
+model.add(keras.layers.Dense(128, activation='relu'))
+model.add(keras.layers.Dropout(0.5)) # Dropout randomly setting a fraction rate of input units to 0 at each update during training time, helps prevent overfitting
+model.add(keras.layers.Dense(CONST_NUM_CLASSES, activation='softmax')) # Introduces non-linearity in the model
+model.compile(loss=keras.losses.categorical_crossentropy, # Loss function -> Measures how accurate the model is during training
+              optimizer='adam', # Optimizer -> How the model is updated based on the data it sees and its loss function.
+              metrics=['accuracy']) # Metrics -> Used to monitor the training and testing steps
 
 # Train the model. Training it requires..
 # 1) Feeding the model with the trained_images and trained_labels
 # 2) The model learns association between the images and labels
 # 3) Ask the model to make predictions about a test set. Verify the predictions match the labls from the test_labels array
-model.fit(train_images, train_labels, epochs=1)
-
+            
+model.fit(train_images, train_labels, epochs=5)
 # Compare how the model performs on the test dataset
 test_loss, test_acc = model.evaluate(test_images,  test_labels, verbose=2)
 
@@ -75,76 +95,18 @@ print("Prediction: ", np.argmax(predictions[0]))
 
 print("Actual: ", test_labels[0])
 
-# Graphing it to look at the full set of 10 class predictions
-def plot_image(i, predictions_array, true_label, img):
-  predictions_array, true_label, img = predictions_array, true_label[i], img[i]
-  plt.grid(False)
-  plt.xticks([])
-  plt.yticks([])
-
-  plt.imshow(img, cmap=plt.cm.binary)
-  predicted_label = np.argmax(predictions_array)
-  if predicted_label == true_label:
-    color = 'blue'
-  else:
-    color = 'red'
-
-  plt.xlabel("{} {:2.0f}% ({})".format(class_names[predicted_label],
-                                100*np.max(predictions_array),
-                                class_names[true_label]),
-                                color=color)
-
-def plot_value_array(i, predictions_array, true_label):
-  predictions_array, true_label = predictions_array, true_label[i]
-  plt.grid(False)
-  plt.xticks(range(10))
-  plt.yticks([])
-  thisplot = plt.bar(range(10), predictions_array, color="#777777")
-  plt.ylim([0, 1])
-  predicted_label = np.argmax(predictions_array)
-
-  thisplot[predicted_label].set_color('red')
-  thisplot[true_label].set_color('blue')
-
-# Looking at the 0th image, prediction and prediction array. Correct prediction labels are blue and red respectively
-# A correct prediction
-i = 0
-plt.figure(figsize=(6,3))
-plt.subplot(1,2,1)
-plot_image(i, predictions[i], test_labels, test_images)
-plt.subplot(1,2,2)
-plot_value_array(i, predictions[i],  test_labels)
+loadedImg = Image.open("testpredict8.png")
+sized = io.fit(loadedImg, (28, 28)) # Rezise it
+grey = sized.convert("L") # Convert it to grayscale
+imgplot = plt.imshow(grey)
 plt.show()
 
-img = 'testpredict2.png'
+# Adapted from https://stackoverflow.com/questions/41563720/error-when-checking-model-input-expected-convolution2d-input-1-to-have-4-dimens
+imgArr = np.ndarray.flatten(np.array(grey)).reshape(1, 784)
+imgArr = imgArr.reshape(imgArr.shape[0], CONST_IMAGE_WIDTH, CONST_IMAGE_HEIGHT, 1)
+imgArr = imgArr.astype('float32')
 
-imaghue=mpimg.imread(img)
-imgplot = plt.imshow(imaghue)
+predictions = model.predict(imgArr)
+print(predictions[0])
 
-plt.show()
-# Plot the first X test images, their predicted labels, and the true labels.
-num_rows = 5
-num_cols = 3
-num_images = num_rows*num_cols
-plt.figure(figsize=(2*2*num_cols, 2*num_rows))
-for i in range(num_images):
-  plt.subplot(num_rows, 2*num_cols, 2*i+1)
-  plot_image(i, predictions[i], test_labels, test_images)
-  plt.subplot(num_rows, 2*num_cols, 2*i+2)
-  plot_value_array(i, predictions[i], test_labels)
-plt.tight_layout()
-plt.show()
-
-num_rows = 5
-num_cols = 3
-num_images = num_rows*num_cols
-plt.figure(figsize=(2*2*num_cols, 2*num_rows))
-for i in range(num_images):
-  plt.subplot(num_rows, 2*num_cols, 2*i+1)
-  plot_image(i, predictions[i], test_labels, test_images)
-  plt.subplot(num_rows, 2*num_cols, 2*i+2)
-  plot_value_array(i, predictions[i], test_labels)
-plt.tight_layout()
-plt.show()
-
-
+print("Prediction: ", np.argmax(predictions[0]))
