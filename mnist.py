@@ -4,7 +4,6 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 # TensorFlow and tf.keras
 import tensorflow as tf
 from tensorflow import keras
-
 # Helper libraries
 import numpy as np
 import matplotlib.pyplot as plt
@@ -76,9 +75,7 @@ print("Prediction: ", np.argmax(predictions[0]))
 
 print("Actual: ", test_labels[0])
 
-
 # Graphing it to look at the full set of 10 class predictions
-
 def plot_image(i, predictions_array, true_label, img):
   predictions_array, true_label, img = predictions_array, true_label[i], img[i]
   plt.grid(False)
@@ -86,7 +83,6 @@ def plot_image(i, predictions_array, true_label, img):
   plt.yticks([])
 
   plt.imshow(img, cmap=plt.cm.binary)
-
   predicted_label = np.argmax(predictions_array)
   if predicted_label == true_label:
     color = 'blue'
@@ -127,6 +123,18 @@ imgplot = plt.imshow(imaghue)
 
 plt.show()
 # Plot the first X test images, their predicted labels, and the true labels.
+num_rows = 5
+num_cols = 3
+num_images = num_rows*num_cols
+plt.figure(figsize=(2*2*num_cols, 2*num_rows))
+for i in range(num_images):
+  plt.subplot(num_rows, 2*num_cols, 2*i+1)
+  plot_image(i, predictions[i], test_labels, test_images)
+  plt.subplot(num_rows, 2*num_cols, 2*i+2)
+  plot_value_array(i, predictions[i], test_labels)
+plt.tight_layout()
+plt.show()
+
 num_rows = 5
 num_cols = 3
 num_images = num_rows*num_cols

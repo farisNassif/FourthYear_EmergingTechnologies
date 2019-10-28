@@ -4,7 +4,7 @@
 
 > Subject: Emerging Technologies (4th Year) 2019<br>
 > Lecturer: Dr Ian McLoughlin<br>
-> [Project Brief](https://github.com/ianmcloughlin/project-2019-emtech)
+> [Project Brief](https://github.com/ianmcloughlin/project-2019-emtech/blob/master/project.pdf)
 
 ~Give a brief rundown of what is asked from the project<br>
 ~Outline of work eg. 'Create web app, users can draw on the page, submit the drawing and see if it's recognised'<br>
@@ -25,4 +25,3 @@ add research notes
 fix up canvas
 make it work on any touch screen device
 ..
-host on heroku
