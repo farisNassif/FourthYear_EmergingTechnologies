@@ -11,6 +11,8 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 from PIL import Image
 from PIL import ImageOps as io
+# Local file used for processing image
+import imageprocessor as ip
 
 # Reoccuring variables
 CONST_IMAGE_WIDTH, CONST_IMAGE_HEIGHT = 28, 28
@@ -72,9 +74,8 @@ model.compile(loss=keras.losses.categorical_crossentropy, # Loss function -> Mea
 # Train the model. Training it requires..
 # 1) Feeding the model with the trained_images and trained_labels
 # 2) The model learns association between the images and labels
-# 3) Ask the model to make predictions about a test set. Verify the predictions match the labls from the test_labels array
-            
-model.fit(train_images, train_labels, epochs=5)
+# 3) Ask the model to make predictions about a test set. Verify the predictions match the labls from the test_labels array          
+model.fit(train_images, train_labels, epochs=1)
 # Compare how the model performs on the test dataset
 test_loss, test_acc = model.evaluate(test_images,  test_labels, verbose=2)
 
@@ -95,18 +96,9 @@ print("Prediction: ", np.argmax(predictions[0]))
 
 print("Actual: ", test_labels[0])
 
-loadedImg = Image.open("testpredict8.png")
-sized = io.fit(loadedImg, (28, 28)) # Rezise it
-grey = sized.convert("L") # Convert it to grayscale
-imgplot = plt.imshow(grey)
-plt.show()
+processedImage = ip.processImage("testpredict2.png")
 
-# Adapted from https://stackoverflow.com/questions/41563720/error-when-checking-model-input-expected-convolution2d-input-1-to-have-4-dimens
-imgArr = np.ndarray.flatten(np.array(grey)).reshape(1, 784)
-imgArr = imgArr.reshape(imgArr.shape[0], CONST_IMAGE_WIDTH, CONST_IMAGE_HEIGHT, 1)
-imgArr = imgArr.astype('float32')
-
-predictions = model.predict(imgArr)
+predictions = model.predict(processedImage)
 print(predictions[0])
 
 print("Prediction: ", np.argmax(predictions[0]))
