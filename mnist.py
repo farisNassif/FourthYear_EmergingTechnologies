@@ -64,6 +64,16 @@ try:
   # load weights into new model
   loaded_model.load_weights("SavedModelWeights.h5")
   print("Loaded model from disk")
+  # evaluate loaded model on test data 
+  # Define X_test & Y_test data first
+  loaded_model.compile(loss=keras.losses.categorical_crossentropy, optimizer='adam', metrics=['accuracy'])
+  score = loaded_model.evaluate(test_images, test_labels, verbose=0)
+  print ("%s: %.2f%%" % (loaded_model.metrics_names[1], score[1]*100))
+
+  processedImage = ip.processImage("testpredict2.png")
+  predictions = loaded_model.predict(processedImage)
+  print(predictions[0])
+  print("Prediction: ", np.argmax(predictions[0]))
 except:
   print("No model was found")
 
@@ -121,9 +131,3 @@ print("Prediction: ", np.argmax(predictions[0]))
 # Examining the test label should confirm this classification is correct
 
 print("Actual: ", test_labels[0])
-
-
-predictions = model.predict(processedImage)
-print(predictions[0])
-
-print("Prediction: ", np.argmax(predictions[0]))
