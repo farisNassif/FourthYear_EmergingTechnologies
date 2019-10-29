@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 import os
-
+import runmnist as rm
 # Having some issues with tensorflow and its depriciated packages
 
 app = Flask(__name__)
@@ -21,6 +21,7 @@ def index():
             # If for some reason data couldn't be commit throw an error message
             return 'Issue with your number submission'
     else:
+        rm.predict("./TestImages/testpredict2.png")
         title = 'Draw a number!'
         # Base Page
         return render_template('layouts/index.html',
