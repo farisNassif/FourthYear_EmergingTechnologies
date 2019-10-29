@@ -54,6 +54,9 @@ train_labels = keras.utils.to_categorical(train_labels, CONST_NUM_CLASSES)
 test_labels = keras.utils.to_categorical(test_labels, CONST_NUM_CLASSES)
 train_labels[0]
 
+
+# Try load a saved model and its weights otherwise create a new one and save it
+# Adapted from: https://stackoverflow.com/questions/35074549/how-to-load-a-model-from-an-hdf5-file-in-keras
 try:
   # load json and create model
   json_file = open('SavedModel.json', 'r')
@@ -76,58 +79,37 @@ try:
   print("Prediction: ", np.argmax(predictions[0]))
 except:
   print("No model was found")
+  # Model Creation, model variable will be used below when compiling
+  model = keras.Sequential()
 
-# Model Creation, model variable will be used below when compiling
-model = keras.Sequential()
+  model.add(keras.layers.Conv2D(32, kernel_size=(3, 3),
+                  activation='relu', input_shape=input_shape))
+  model.add(keras.layers.MaxPooling2D(pool_size=(2, 2))) # Max pooling operation for spatial data                 
+  model.add(keras.layers.Conv2D(64, (3, 3), activation='relu'))
+  model.add(keras.layers.MaxPooling2D(pool_size=(2, 2))) # Max pooling operation for spatial data  
+  model.add(keras.layers.Flatten())  # Flattens the 2D arrays for fully connected layers
+  model.add(keras.layers.Dense(128, activation='relu'))
+  model.add(keras.layers.Dense(CONST_NUM_CLASSES, activation='softmax')) # Introduces non-linearity in the model
 
-model.add(keras.layers.Conv2D(32, kernel_size=(3, 3),
-                 activation='relu', input_shape=input_shape))
-model.add(keras.layers.MaxPooling2D(pool_size=(2, 2))) # Max pooling operation for spatial data                 
-model.add(keras.layers.Conv2D(64, (3, 3), activation='relu'))
-model.add(keras.layers.MaxPooling2D(pool_size=(2, 2))) # Max pooling operation for spatial data  
-model.add(keras.layers.Flatten())  # Flattens the 2D arrays for fully connected layers
-model.add(keras.layers.Dense(128, activation='relu'))
-model.add(keras.layers.Dense(CONST_NUM_CLASSES, activation='softmax')) # Introduces non-linearity in the model
+  model.compile(loss=keras.losses.categorical_crossentropy, # Loss function -> Measures how accurate the model is during training
+                optimizer='adam', # Optimizer -> How the model is updated based on the data it sees and its loss function.
+                metrics=['accuracy']) # Metrics -> Used to monitor the training and testing steps
 
-model.compile(loss=keras.losses.categorical_crossentropy, # Loss function -> Measures how accurate the model is during training
-              optimizer='adam', # Optimizer -> How the model is updated based on the data it sees and its loss function.
-              metrics=['accuracy']) # Metrics -> Used to monitor the training and testing steps
+  # Train the model. Training it requires..
+  # 1) Feeding the model with the trained_images and trained_labels
+  # 2) The model learns association between the images and labels
+  # 3) Ask the model to make predictions about a test set. Verify the predictions match the labls from the test_labels array          
+  model.fit(train_images, train_labels, epochs=10)
+  # Compare how the model performs on the test dataset
+  test_loss, test_acc = model.evaluate(test_images,  test_labels, verbose=2)
+  # Save the model
 
-# Train the model. Training it requires..
-# 1) Feeding the model with the trained_images and trained_labels
-# 2) The model learns association between the images and labels
-# 3) Ask the model to make predictions about a test set. Verify the predictions match the labls from the test_labels array          
-model.fit(train_images, train_labels, epochs=1)
-# Compare how the model performs on the test dataset
-test_loss, test_acc = model.evaluate(test_images,  test_labels, verbose=2)
+  # Serialize to JSON
+  json_file = model.to_json()
+  with open("SavedModel.json", "w") as file:
+    file.write(json.dumps(json.loads(json_file), indent=4))
 
-# Save the model
-
-# Serialize to JSON
-json_file = model.to_json()
-with open("SavedModel.json", "w") as file:
-   file.write(json.dumps(json.loads(json_file), indent=4))
-
-# serialize weights to HDF5
-model.save_weights("SavedModelWeights.h5")
-print("Saved model to disk")
-
-
-
-
-print('\nTest accuracy:', test_acc)
-
-# Now with the model trained, can use it to make predictions on some images
-
-# The model should have predicted the label for each image in the training set
-predictions = model.predict(test_images)
-
-print(predictions[0])
-
-# Can't gauge much from that output, but the array index[7] has the highest confidence value
-print("Prediction: ", np.argmax(predictions[0]))
-
-# The model is confident this image is a 7 (class_names[7])
-# Examining the test label should confirm this classification is correct
-
-print("Actual: ", test_labels[0])
+  # serialize weights to HDF5
+  model.save_weights("SavedModelWeights.h5")
+  print("Saved model to disk")
+  print('\nTest accuracy:', test_acc)
