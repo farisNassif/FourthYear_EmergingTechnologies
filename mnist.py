@@ -3,14 +3,13 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 # TensorFlow and tf.keras
 import tensorflow as tf
-from tensorflow import keras
+import keras
+# For loading the saved model
+from keras.models import model_from_json
+import simplejson as json
 # Helper libraries
 import numpy as np
 import matplotlib.pyplot as plt
-# Used for predicting local image
-import matplotlib.image as mpimg
-from PIL import Image
-from PIL import ImageOps as io
 # Local file used for processing image
 import imageprocessor as ip
 
@@ -55,6 +54,19 @@ train_labels = keras.utils.to_categorical(train_labels, CONST_NUM_CLASSES)
 test_labels = keras.utils.to_categorical(test_labels, CONST_NUM_CLASSES)
 train_labels[0]
 
+try:
+  # load json and create model
+  json_file = open('SavedModel.json', 'r')
+  loaded_model_json = json_file.read()
+  json_file.close()
+  loaded_model = model_from_json(loaded_model_json)
+
+  # load weights into new model
+  loaded_model.load_weights("SavedModelWeights.h5")
+  print("Loaded model from disk")
+except:
+  print("No model was found")
+
 # Model Creation, model variable will be used below when compiling
 model = keras.Sequential()
 
@@ -79,6 +91,20 @@ model.fit(train_images, train_labels, epochs=1)
 # Compare how the model performs on the test dataset
 test_loss, test_acc = model.evaluate(test_images,  test_labels, verbose=2)
 
+# Save the model
+
+# Serialize to JSON
+json_file = model.to_json()
+with open("SavedModel.json", "w") as file:
+   file.write(json.dumps(json.loads(json_file), indent=4))
+
+# serialize weights to HDF5
+model.save_weights("SavedModelWeights.h5")
+print("Saved model to disk")
+
+
+
+
 print('\nTest accuracy:', test_acc)
 
 # Now with the model trained, can use it to make predictions on some images
@@ -96,7 +122,6 @@ print("Prediction: ", np.argmax(predictions[0]))
 
 print("Actual: ", test_labels[0])
 
-processedImage = ip.processImage("testpredict8.png")
 
 predictions = model.predict(processedImage)
 print(predictions[0])
