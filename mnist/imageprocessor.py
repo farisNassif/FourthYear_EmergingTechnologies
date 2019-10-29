@@ -1,13 +1,10 @@
 # Helper libraries
 import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
 # Used for reading/helping process the image
 from PIL import Image
 from PIL import ImageOps as io
 
 # This function will take in a normal image file and reshape it so that it becomes compatible with the prediction model
-#
 def processImage(image):
     # Load the parameterized image
     loadedImg = Image.open(image)
