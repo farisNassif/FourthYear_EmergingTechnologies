@@ -6,7 +6,7 @@ $( document ).ready(function() {
   // Canvas creation method, creates canvas object
   function createCanvas(parent, width, height) {
     // Ref to canvasBorder within styles.css
-    var canvas = document.getElementById("canvasBorder");
+    var canvas = document.getElementById("canvas");
     canvas.context = canvas.getContext('2d');
     return canvas;
   }
@@ -52,7 +52,7 @@ $( document ).ready(function() {
 
   // Clear the canvas, given the paramaters of the drawable area
   function clearCanvas() {
-    var canvas = document.getElementById("canvasBorder");
+    var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
         ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
@@ -63,5 +63,7 @@ $( document ).ready(function() {
 
   $( "#publishButton" ).click(function(){
     console.log("number published!");
+    var dataURL = canvas.toDataURL();
+    console.log(dataURL);
   });
 });
