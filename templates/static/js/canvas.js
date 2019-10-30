@@ -2,7 +2,7 @@
 // Adapted from https://www.jitsejan.com/python-and-javascript-in-flask.html
 
 $( document ).ready(function() {
-
+  
   // Canvas creation method, creates canvas object
   function createCanvas(parent, width, height) {
     // Ref to canvasBorder within styles.css
@@ -62,8 +62,34 @@ $( document ).ready(function() {
   });
 
   $( "#publishButton" ).click(function(){
-    console.log("number published!");
+    //console.log("number published!");
     var dataURL = canvas.toDataURL();
+    //var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  // here is the most important part because if you dont replace you will get a DOM 18 exception.
+    //var link = document.getElementById('link');
+    //link.setAttribute('download', 'MintyPaper.png');
+    //link.setAttribute('href', canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"));
+    //link.click();
+    //window.location.href=image; // it will save locally
+    canvas.resizeAndExport = function(width, height){
+      // create a new canvas
+      var c = document.createElement('canvas');
+      // set its width&height to the required ones
+      c.width = width;
+      c.height = height;
+      // draw our canvas to the new one
+      c.getContext('2d').drawImage(this, 0,0,32, 32, 0,0,width, height);
+      // return the resized canvas dataURL
+      return c.toDataURL();
+      }
+    // create an image that will get our resized export as src
+    var img = new Image();
+    img.src = canvas.resizeAndExport(28, 28);
+    document.body.appendChild(img);
+    img = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  
+    var link = document.getElementById('link');
+    link.setAttribute('download', 'NumberDrawn.png');
+    link.setAttribute('href', canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"));
+    link.click();
     console.log(dataURL);
   });
 });
