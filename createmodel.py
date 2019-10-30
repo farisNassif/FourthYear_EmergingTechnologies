@@ -32,7 +32,7 @@ def createAndSaveModel():
     # 1) Feeding the model with the trained_images and trained_labels
     # 2) The model learns association between the images and labels
     # 3) Ask the model to make predictions about a test set. Verify the predictions match the labls from the test_labels array          
-    model.fit(mb.train_images, mb.train_labels, epochs=1)
+    model.fit(mb.train_images, mb.train_labels, epochs=14)
     # Compare how the model performs on the test dataset
     test_loss, test_acc = model.evaluate(mb.test_images,  mb.test_labels, verbose=2)
 
@@ -46,3 +46,4 @@ def createAndSaveModel():
     model.save_weights("SavedModelWeights.h5")
     print("Saved model to disk")
     print('\nTest accuracy:', test_acc)
+    print('\nTest loss:', test_loss)

@@ -21,7 +21,7 @@ def index():
             # If for some reason data couldn't be commit throw an error message
             return 'Issue with your number submission'
     else:
-        rm.predict("nine.png")
+        rm.predict("seven.png")
         title = 'Draw a number!'
         # Base Page
         return render_template('layouts/index.html',
