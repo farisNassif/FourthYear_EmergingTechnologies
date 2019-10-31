@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 # Local file for running the model
 import runmnist as rm
 import uuid
+import base64
+import re
 # Having some issues with tensorflow and its depriciated packages
 
 app = Flask(__name__)
@@ -21,7 +23,20 @@ def index():
 # Upload/Publish route
 @app.route('/upload', methods=['Post'])
 def upload():
+    # Requesting the drawn data through the AJAX function 
     image_b64=request.values[('imageBase64')]
+    
+    # Removing the first part of the base64 String, don't need it
+    base64_data = re.sub('^data:image/.+;base64,', '', image_b64)
+    print(base64_data)
+    # Open the file that the base64 data will be written to
+    output=open('output.png', 'wb')
+    # Decode the data
+    decoded=base64.b64decode(base64_data)
+    # Write the decoded data to output.png, should now store the drawn image
+    output.write(decoded)
+    output.close()
+    
     return "jeje"
 
 def create_csv(text):
