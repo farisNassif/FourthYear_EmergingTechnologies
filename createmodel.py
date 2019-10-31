@@ -39,11 +39,11 @@ def createAndSaveModel():
     # Save the model
     # Serialize to JSON
     json_file = model.to_json()
-    with open("SavedModel.json", "w") as file:
+    with open("SavedModel/SavedModel.json", "w") as file:
         file.write(json.dumps(json.loads(json_file), indent=4))
 
     # serialize weights to HDF5
-    model.save_weights("SavedModelWeights.h5")
+    model.save_weights("SavedModel/SavedModelWeights.h5")
     print("Saved model to disk")
     print('\nTest accuracy:', test_acc)
     print('\nTest loss:', test_loss)

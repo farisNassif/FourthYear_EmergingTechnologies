@@ -21,7 +21,7 @@ def processImage(image):
     # Image needs to be black -or- white, use a lambda function to loop through each pixel of the image
     # If the pixel (x) is less than 128 set it to black (0,0,0), if greater set to white (255,255,255)
     im = grey.point((lambda x: 0 if x<128 else 255), '1') # Mode 1 (black/white)
-    im.save('img.png') # Save the new image for testing
+    im.save('img.png') # Save the new image
 
     # Adapted from https://stackoverflow.com/questions/41563720/error-when-checking-model-input-expected-convolution2d-input-1-to-have-4-dimens
     imgArr = np.ndarray.flatten(np.array(im)).reshape(1, 784)
