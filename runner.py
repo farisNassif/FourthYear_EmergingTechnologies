@@ -14,7 +14,6 @@ app._static_folder = os.path.abspath("templates/static/")
 # Index route so when I browse to the url it doesn't 404
 @app.route('/', methods=['Post', 'GET'])
 def index():
-    rm.predict("DrawnNumber.png")
     title = 'Draw a number!'
     # Base Page
     return render_template('layouts/index.html',
@@ -39,7 +38,9 @@ def upload():
     # Close the file
     output.close()
     
-    return "jeje"
+    res = rm.predict("DrawnNumber.png")
+    print("Prediction: " + str(res))
+    return str(res)
 
 if __name__ == "__main__":
     # If theres any errors they'll pop up on the page

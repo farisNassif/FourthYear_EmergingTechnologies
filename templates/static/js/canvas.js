@@ -71,7 +71,8 @@ $( document ).ready(function() {
             imageBase64:dataURL
             }
         }).done(function(o){
-            console.log('saved');
+            document.getElementById('mytext').value = o;
+            console.log(o);
         });
   }
   /* Binding for the ClearButton in index.html */

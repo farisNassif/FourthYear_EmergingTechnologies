@@ -15,11 +15,14 @@ import mnistbase as mb
 # Local file used to create model
 import createmodel as cm
 
+# Prediction function
 def predict(image):
+  # Process, resize, flatten the image etc
   processedImage = ip.processImage(image)
+  # Pass the processed image to the model
   predictions = loaded_model.predict(processedImage)
-  print(predictions[0])
-  print("Prediction: ", np.argmax(predictions[0]))
+  # Return the prediction
+  return np.argmax(predictions[0])
 
 # Try load a saved model and its weights otherwise create a new one and save it
 # Adapted from: https://stackoverflow.com/questions/35074549/how-to-load-a-model-from-an-hdf5-file-in-keras
