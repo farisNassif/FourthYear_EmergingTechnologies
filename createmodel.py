@@ -5,9 +5,6 @@ import tensorflow as tf
 import keras
 # For saving the model and weights
 import simplejson as json
-# Helper libraries
-import numpy as np
-import matplotlib.pyplot as plt
 # Local base file
 import mnistbase as mb
 

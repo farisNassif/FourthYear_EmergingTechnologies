@@ -14,13 +14,14 @@ app._static_folder = os.path.abspath("templates/static/")
 # Index route so when I browse to the url it doesn't 404
 @app.route('/', methods=['Post', 'GET'])
 def index():
-    rm.predict("testpredict2.png")
+    rm.predict("DrawnNumber.png")
     title = 'Draw a number!'
     # Base Page
     return render_template('layouts/index.html',
                        title=title)
 
 # Upload/Publish route
+# Saving the canvas data adapted from: https://www.science-emergence.com/Articles/How-to-convert-a-base64-image-in-png-format-using-python-/
 @app.route('/upload', methods=['Post'])
 def upload():
     # Requesting the drawn data through the AJAX function 
@@ -30,20 +31,15 @@ def upload():
     base64_data = re.sub('^data:image/.+;base64,', '', image_b64)
     print(base64_data)
     # Open the file that the base64 data will be written to
-    output=open('output.png', 'wb')
+    output=open('DrawnNumber.png', 'wb')
     # Decode the data
     decoded=base64.b64decode(base64_data)
     # Write the decoded data to output.png, should now store the drawn image
     output.write(decoded)
+    # Close the file
     output.close()
     
     return "jeje"
-
-def create_csv(text):
-    unique_id = str(uuid.uuid4())
-    with open('images/'+unique_id+'.png', 'a') as file:
-        file.write(text[1:-1]+"\n")
-    return unique_id
 
 if __name__ == "__main__":
     # If theres any errors they'll pop up on the page
