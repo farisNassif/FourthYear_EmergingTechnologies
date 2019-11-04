@@ -3,12 +3,17 @@ import numpy as np
 # Used for reading/helping process the image
 from PIL import Image
 from PIL import ImageOps as io
-import numpy as np
-import matplotlib.pyplot as plt
 # Local base file
 import mnistbase as mb
 # For deleting image after it's been processed
 import os
+
+"""
+This Class functions as the processor for images that will be read by the model.
+An image that is stored in memory is passed into processImage(), shaped and processed accordingly.
+
+Comments within the functions should provide an insight into how that function behaves.
+"""
 
 # This function will take in a normal image file and reshape it so that it becomes compatible with the prediction model
 def processImage(image):

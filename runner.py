@@ -12,8 +12,6 @@ import io
 # Used for opening the image in memory
 from PIL import Image
 
-# Having some issues with tensorflow and its depriciated packages
-
 app = Flask(__name__)
 app._static_folder = os.path.abspath("templates/static/")
 

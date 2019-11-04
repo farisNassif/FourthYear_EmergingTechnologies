@@ -1,5 +1,3 @@
-# Desc
-
 # TensorFlow and tf.keras
 import tensorflow as tf
 import keras
@@ -14,6 +12,14 @@ import imageprocessor as ip
 import mnistbase as mb
 # Local file used to create model
 import createmodel as cm
+
+
+"""
+This class functions as a runner for the model, ran by the main runner, runner.py.
+The class passes an image from the runner to the image processer, after the image is processed it's sent off to be predicted.
+
+If no model is found (Saved) then a new one will be created and saved, then the program will run as normal.
+"""
 
 # Prediction function
 def predict(image):
@@ -32,10 +38,10 @@ try:
   loaded_model_json = json_file.read()
   json_file.close()
   loaded_model = model_from_json(loaded_model_json)
-
   # load weights into new model
   loaded_model.load_weights("SavedModel/SavedModelWeights.h5")
   print("Loaded model from disk")
+
   # evaluate loaded model on test data 
   # Define X_test & Y_test data first
   loaded_model.compile(loss=keras.losses.categorical_crossentropy, optimizer='adam', metrics=['accuracy'])
