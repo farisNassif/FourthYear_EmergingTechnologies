@@ -3,9 +3,15 @@ import os
 import matplotlib.pyplot as plt
 # Local file for running the model
 import runmnist as rm
-import uuid
+# Needed to decode the String data received from the canvas
 import base64
+# Regular expression matching, cuts off the unnecessary part of the Base64 String
 import re
+# Needed to store the image in memory rather than saving it on disk
+import io 
+# Used for opening the image in memory
+from PIL import Image
+
 # Having some issues with tensorflow and its depriciated packages
 
 app = Flask(__name__)
@@ -28,17 +34,16 @@ def upload():
     
     # Removing the first part of the base64 String, don't need it
     base64_data = re.sub('^data:image/.+;base64,', '', image_b64)
-    print(base64_data)
-    # Open the file that the base64 data will be written to
-    output=open('DrawnNumber.png', 'wb')
+
     # Decode the data
     decoded=base64.b64decode(base64_data)
-    # Write the decoded data to output.png, should now store the drawn image
-    output.write(decoded)
-    # Close the file
-    output.close()
-    
-    res = rm.predict("DrawnNumber.png")
+    # In memory binary stream for the image received
+    # https://docs.python.org/3/library/io.html
+    inMemorySave = io.BytesIO(decoded)
+    # Image in memory still needs to be opened before sent to be processed
+    predictMe = Image.open(inMemorySave)
+    # Pass the image and receive back a prediction
+    res = rm.predict(predictMe)
     print("Prediction: " + str(res))
     return str(res)
 

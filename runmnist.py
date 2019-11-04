@@ -42,5 +42,6 @@ try:
   score = loaded_model.evaluate(mb.test_images, mb.test_labels, verbose=0)
   print ("%s: %.2f%%" % (loaded_model.metrics_names[1], score[1]*100))
 except:
+  # In the case a model wasn't found, make a new one!
   print("No model was found, creating new model ...")
   cm.createAndSaveModel()
