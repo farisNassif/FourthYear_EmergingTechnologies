@@ -1,11 +1,13 @@
-<!-- Base page, other pages will extend this page-->
+<!-- Base page, other pages will extend this page -->
+<!-- Since I only really need one page this is pretty unnecessary, but its good practise I guess -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     {% block head %}
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <!-- Bootstrapping any pages inheriting this page via the super() call; layout is a lot nicer with this addition -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- CSS file reference, need to include this for the canvas to have a border and other design features -->
     <link rel="stylesheet" href="/static/css/styles.css">
     <!-- JQuery reference, required for actually drawing on the canvas -->
