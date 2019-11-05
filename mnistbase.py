@@ -4,8 +4,10 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import tensorflow as tf
 import keras
 
-# This class functions as the base, it isn't dependent on any other local mnist related class
-# Createmodel.py uses it to construct a model if one isn't saved and runmnist uses it to run a saved model
+""" 
+This class functions as the base, it isn't dependent on any other local mnist related class.
+Createmodel.py uses it to construct a model if one isn't saved and runmnist uses it to run a saved model.
+"""
 
 # Reoccuring variables
 CONST_IMAGE_WIDTH, CONST_IMAGE_HEIGHT = 28, 28
@@ -21,9 +23,9 @@ numbers_mnist = tf.keras.datasets.mnist
 (train_images, train_labels), (test_images, test_labels) = numbers_mnist.load_data()
 
 # Manipulating the data from a 3d => 4d numpy arrays
-train_images = train_images.reshape(train_images.shape[0], CONST_IMAGE_WIDTH, CONST_IMAGE_HEIGHT, 1)
-test_images = test_images.reshape(test_images.shape[0], CONST_IMAGE_WIDTH, CONST_IMAGE_HEIGHT, 1)
-input_shape = (CONST_IMAGE_WIDTH, CONST_IMAGE_HEIGHT, 1)
+train_images = train_images.reshape(train_images.shape[0], CONST_IMAGE_WIDTH, CONST_IMAGE_HEIGHT, CONST_IMAGE_CHANNELS)
+test_images = test_images.reshape(test_images.shape[0], CONST_IMAGE_WIDTH, CONST_IMAGE_HEIGHT, CONST_IMAGE_CHANNELS)
+input_shape = (CONST_IMAGE_WIDTH, CONST_IMAGE_HEIGHT, CONST_IMAGE_CHANNELS)
 
 # Ensuring values are floats so decimal points can be used after division
 # https://stackoverflow.com/questions/48219442/use-tf-to-float-or-tf-image-convert-image-dtype-in-image-pipeline-for-cn
@@ -40,7 +42,6 @@ test_images = test_images / 255.0
 # https://keras.io/utils/
 train_labels = keras.utils.to_categorical(train_labels, CONST_NUM_CLASSES)
 test_labels = keras.utils.to_categorical(test_labels, CONST_NUM_CLASSES)
-train_labels[0]
 
 
 

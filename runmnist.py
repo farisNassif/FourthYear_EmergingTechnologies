@@ -1,5 +1,4 @@
-# TensorFlow and tf.keras
-import tensorflow as tf
+# Keras import
 import keras
 # For loading the saved model
 from keras.models import model_from_json
@@ -38,6 +37,7 @@ try:
   loaded_model_json = json_file.read()
   json_file.close()
   loaded_model = model_from_json(loaded_model_json)
+
   # load weights into new model
   loaded_model.load_weights("SavedModel/SavedModelWeights.h5")
   print("Loaded model from disk")

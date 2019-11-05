@@ -1,6 +1,7 @@
+# Flask imports and helpers
 from flask import Flask, render_template, request, jsonify
+# Used for building paths
 import os
-import matplotlib.pyplot as plt
 # Local file for running the model
 import runmnist as rm
 # Needed to decode the String data received from the canvas
@@ -45,6 +46,6 @@ def upload():
     print("Prediction: " + str(res))
     return str(res)
 
+# Debug set to true, any changes made will refresh the connection
 if __name__ == "__main__":
-    # If theres any errors they'll pop up on the page
     app.run(debug=True)
