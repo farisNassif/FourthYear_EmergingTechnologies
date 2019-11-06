@@ -23,6 +23,7 @@ numbers_mnist = tf.keras.datasets.mnist
 (train_images, train_labels), (test_images, test_labels) = numbers_mnist.load_data()
 
 # Manipulating the data from a 3d => 4d numpy arrays
+# Conv2d is expected to have 4 dimensions
 train_images = train_images.reshape(train_images.shape[0], CONST_IMAGE_WIDTH, CONST_IMAGE_HEIGHT, CONST_IMAGE_CHANNELS)
 test_images = test_images.reshape(test_images.shape[0], CONST_IMAGE_WIDTH, CONST_IMAGE_HEIGHT, CONST_IMAGE_CHANNELS)
 input_shape = (CONST_IMAGE_WIDTH, CONST_IMAGE_HEIGHT, CONST_IMAGE_CHANNELS)

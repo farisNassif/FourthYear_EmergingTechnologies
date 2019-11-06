@@ -28,6 +28,9 @@ def createAndSaveModel():
                     activation='relu', # Relu worked best with my model https://datascience.stackexchange.com/questions/18667/relu-vs-sigmoid-in-mnist-example
                     input_shape=mb.input_shape)) # Passed in value is equal to (28, 28, 1), same value as that of images to pass into the model
     
+    # Temp
+    model.add(MaxPooling2D(pool_size=(2, 2)))      
+
     # This time add another convolution layer with slightly different paramaters 
     model.add(Conv2D(64, 
                     (3, 3), 
@@ -37,11 +40,18 @@ def createAndSaveModel():
     # Eg. in a (2,2) pool it splits a pixel image into 4 chucks and takes the 4 highest values from each chunk
     model.add(MaxPooling2D(pool_size=(2, 2)))               
 
+    # Dropout causes my model to crash when loaded, no choice but to exclude it
+    # model.add(Dropout(0.2))
+
     # Flattens the 2D arrays for fully connected layers
     model.add(Flatten())  
 
     # Apply a dense layer with a output of 128 (nodes)
     model.add(Dense(128, 
+                    activation='relu'))
+
+    # Apply a dense layer with a output of 50 (nodes)
+    model.add(Dense(50, 
                     activation='relu'))
 
     # Apply a final dense layer with a output of 10 
@@ -61,7 +71,7 @@ def createAndSaveModel():
     model.fit(mb.train_images, mb.train_labels, # Training images and labels
               validation_data=(mb.test_images, mb.test_labels), # Evaluate the loss and any model metrics at the end of each epoch
               batch_size=20, # Too large a mini-batch size usually leads to a lower accuracy
-              epochs=15, # Number of iterations
+              epochs=1, # Number of iterations
               verbose=1) # Provides a progress bar when training
 
     # Compare how the model performs on the test dataset
@@ -73,11 +83,11 @@ def createAndSaveModel():
     """ Save the model """
     # Serialize to JSON
     json_file = model.to_json()
-    with open("SavedModel/SavedModel.json", "w") as file:
+    with open("../saved_model/SavedModel.json", "w") as file:
         file.write(json.dumps(json.loads(json_file), indent=4))
 
     # Serialize weights to HDF5
-    model.save_weights("SavedModel/SavedModelWeights.h5")
+    model.save_weights("../saved_model/SavedModelWeights.h5")
 
     # Printing for my sanity
     print("Saved model to disk")

@@ -53,7 +53,6 @@ def processImage(image):
     imgArr = imgArr.reshape(imgArr.shape[0], 28, 28, 1)
     # Convert the float type
     imgArr = imgArr.astype('float32')
-
     # Remove saved image to clean up directory
     os.remove('toPredict.png')
 
