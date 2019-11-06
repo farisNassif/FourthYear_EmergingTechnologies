@@ -20,39 +20,36 @@ def createAndSaveModel():
     """ Create the model """
     model = keras.Sequential()
 
+    """ First CONV => POOL Layer """
     # A 2d convolution layer allows spatial convolution over images
     # Creates a convolution kernel (small matrix) 
-    model.add(Conv2D(32, # 32 represents the amount of filters 
+    model.add(Conv2D(50, # 32 represents the amount of filters 
                     kernel_size=(5, 5), # Kernel_size 2 integers specifying width and height of the convolution window (5x5)  
                     padding='same', # Zero padding
                     activation='relu', # Relu worked best with my model https://datascience.stackexchange.com/questions/18667/relu-vs-sigmoid-in-mnist-example
-                    input_shape=mb.input_shape)) # Passed in value is equal to (28, 28, 1), same value as that of images to pass into the model
-    
-    # Temp
-    model.add(MaxPooling2D(pool_size=(2, 2)))      
+                    input_shape=mb.input_shape)) # Passed in value is equal to (28, 28, 1), same value as that of images to pass into the model 
+    # Used for downsampling the image size
+    # Eg. in a (2,2) pool it splits a pixel image into 4 chucks and takes the 4 highest values from each chunk
+    model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), dim_ordering="th"))      
 
+    """ Second CONV => POOL Layer """
     # This time add another convolution layer with slightly different paramaters 
-    model.add(Conv2D(64, 
+    model.add(Conv2D(100, 
                     (3, 3), 
                     activation='relu')) 
-
-    # Used for downsampling the image size. 
-    # Eg. in a (2,2) pool it splits a pixel image into 4 chucks and takes the 4 highest values from each chunk
-    model.add(MaxPooling2D(pool_size=(2, 2)))               
+    # Used for downsampling the image size
+    model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2), dim_ordering="th")) 
 
     # Dropout causes my model to crash when loaded, no choice but to exclude it
     # model.add(Dropout(0.2))
 
+    """ Fully Connected Layer """
     # Flattens the 2D arrays for fully connected layers
     model.add(Flatten())  
-
-    # Apply a dense layer with a output of 128 (nodes)
-    model.add(Dense(128, 
+    # Apply a dense layer with a output of 500 (nodes)
+    model.add(Dense(500, 
                     activation='relu'))
 
-    # Apply a dense layer with a output of 50 (nodes)
-    model.add(Dense(50, 
-                    activation='relu'))
 
     # Apply a final dense layer with a output of 10 
     # Softmax is applied to the final layer as it can be used to represent catagorical data, outputing results ranging from 0 upto 1
@@ -70,8 +67,8 @@ def createAndSaveModel():
     # 3) Ask the model to make predictions about a test set. Verify the predictions match the labls from the test_labels array          
     model.fit(mb.train_images, mb.train_labels, # Training images and labels
               validation_data=(mb.test_images, mb.test_labels), # Evaluate the loss and any model metrics at the end of each epoch
-              batch_size=20, # Too large a mini-batch size usually leads to a lower accuracy
-              epochs=1, # Number of iterations
+              batch_size=50, # Too large a mini-batch size usually leads to a lower accuracy
+              epochs=20, # Number of iterations
               verbose=1) # Provides a progress bar when training
 
     # Compare how the model performs on the test dataset

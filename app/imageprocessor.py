@@ -15,11 +15,14 @@ An image that is stored in memory is passed into processImage(), shaped and proc
 Comments within the functions should provide an insight into how that function behaves.
 """
 
+# https://arrow.dit.ie/cgi/viewcontent.cgi?article=1190&context=scschcomdis - 3.8.1 Normalization and Reshape Data
 # This function will take in a normal image file and reshape it so that it becomes compatible with the prediction model
 def processImage(image):
     # Load the parameterized image
     loadedImg = image
     
+
+
     # Resize the image
     sized = io.fit(loadedImg, (28,28))
 
@@ -53,6 +56,7 @@ def processImage(image):
     imgArr = imgArr.reshape(imgArr.shape[0], 28, 28, 1)
     # Convert the float type
     imgArr = imgArr.astype('float32')
+    
     # Remove saved image to clean up directory
     os.remove('toPredict.png')
 
