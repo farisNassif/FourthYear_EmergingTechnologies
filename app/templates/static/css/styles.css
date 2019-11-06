@@ -1,0 +1,13 @@
+button{
+    background-color: rgb(64, 23, 31);
+    color: white;
+}
+
+#canvas{
+    border: 2px solid rgb(1, 8, 22);
+}
+
+p{
+  font-size: 13px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
