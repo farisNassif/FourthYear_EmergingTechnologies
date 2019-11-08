@@ -1,7 +1,4 @@
-import base64
-
 from cv2 import cv2
-import numpy as np
 from PIL import Image
 from PIL import ImageOps as io
 
@@ -10,7 +7,7 @@ This Class contains utility functions that can TODO
 
 """
 
-# Takes in an image and 
+# Takes in an image and processes it accordingly before transforming it into an array
 def image_to_array(image):
     # Resize the image
     image = io.fit(image, (28,28))
@@ -42,7 +39,7 @@ def invert_values(image_array):
     # Need to make the array flat to allow looping
     array_flattened = image_array.flatten()
 
-    # Inverts the values within the array { x => 1 - x } |E.G| { 0.4 = 1 - 0.4 } => x is now 0.6
+    # Inverts the values within the array { x => 1 - x } => E.G => { 0.4 = 1 - 0.4 } => x is now 0.6
     for i in range(array_flattened.size):
         array_flattened[i] = 1 - image_array[i]
 
