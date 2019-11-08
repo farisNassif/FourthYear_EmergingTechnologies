@@ -8,9 +8,10 @@ import mnistbase as mb
 # For deleting image after it's been processed
 import os
 
+
+
 """
-This Class functions as the processor for images that will be read by the model.
-An image that is stored in memory is passed into processImage(), shaped and processed accordingly.
+This Class functions as the (pre)processor for images that will be read by the model.
 
 Comments within the functions should provide an insight into how that function behaves.
 """
@@ -20,8 +21,6 @@ Comments within the functions should provide an insight into how that function b
 def processImage(image):
     # Load the parameterized image
     loadedImg = image
-    
-
 
     # Resize the image
     sized = io.fit(loadedImg, (28,28))

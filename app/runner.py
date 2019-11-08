@@ -36,7 +36,7 @@ def upload():
 
     # Decode the data
     decoded=base64.b64decode(base64_data)
-    # In memory binary stream for the image received https://docs.python.org/3/library/io.html
+    # In memory binary stream for the image received. https://docs.python.org/3/library/io.html
     inMemorySave = io.BytesIO(decoded)
     # Image in memory still needs to be opened before sent to be processed
     predictMe = Image.open(inMemorySave)

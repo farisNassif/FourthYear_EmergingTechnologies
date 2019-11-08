@@ -17,10 +17,9 @@ import createmodel as cm
 This class functions as a runner for the model, ran by the main runner, runner.py.
 The class passes an image from the runner to the image processer, after the image is processed it's sent off to be predicted.
 
-If no model is found (Saved) then a new one will be created and saved, then the program will run as normal.
+If no model is found (Saved) then a new one will be created and saved, the program will then run as normal.
 """
 
-# Prediction function
 def predict(image):
   # Process, resize, flatten the image etc
   processedImage = ip.processImage(image)
@@ -51,3 +50,4 @@ except:
   # In the case a model wasn't found, make a new one!
   print("No model was found, creating new model ...")
   cm.createAndSaveModel()
+  
