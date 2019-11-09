@@ -11,27 +11,39 @@
 
 <div class="jumbotron text-center text-white rounded-0" style="padding-top:24px; padding-bottom:12px; background: rgb(64, 23, 31)">          
   <h1>Hand Written Digit Recognizer</h1>
-  <p style="font-size: 17px;"><i>a neural network for written digit recognition</i></p>
+  <p style="font-size: 17px;"><i>a neural network trained on the MNIST dataset for written digit recognition</i></p>
 </div>
 
-
-
-<div class="jumbotron text-center text-white rounded-0 ">
-      <h2 style="padding: 0px; font-size: 34px; color: rgb(25, 9, 54);">{{ title }}</h2>
-
-      <canvas id="canvas" width="200" height="200"></canvas>
-  <div>
-      <button id="clearButton" class="btn btn-outline-primary">Clear Canvas</button>  
-      <button id="publishButton" class="btn btn-outline-primary">Publish</button><br>
-      <br>
-      <input type="text" id="mytext"> 
+<div class="row align-items-center container-fluid">
+  <div class="col-lg-5 rounded" style="min-height: 400px;">
+      <div class="jumbotron text-center" style="min-height: 400px">
+        <h2 style="font-size: 22px; color: rgb(25, 9, 54);">{{ title }}</h2>
+        <canvas id="canvas" width="200" height="200"></canvas>
+      <div>
+          <button id="clearButton" class="btn btn-outline-primary">Clear Canvas</button>  
+          <button id="publishButton" class="btn btn-outline-primary">Publish</button><br>
+          <br>
+          <h2 style="color: rgb(121, 31, 31);">Prediction<h2 style=" padding-left: 10px; color: rgb(0, 0, 0);" id="prediction"class="prediction">?</h2></h2>
+      </div>
+    </div>
   </div>
-</div>
 
+  <div class="col-lg-7" style="font-family:courier; margin-top: 30px;">
+    <div class="rounded" >
+      <center>
+      <h4><i><b>A CNN For Recognising Mouse-Drawn Digits With Keras,OpenCV & MNIST</b></i></h4>
+      <p>Draw a digit on the canvas and have the trained neural network try and guess what it is!
+      <br><br>The drawn image is encoded, decoded, resized, processed and fed to the trained model. The model then spits out the likely option based on the 60000 images it was previously trained on.
+      </p>
+      <p>Heres a picture of the structure of the <a href="https://github.com/farisNassif/FourthYear_EmergingTechnologies/blob/master/saved_model/model.png">model</a> that the digits are fed to.</p>
+      <p>For more information on how that all works take a look at the <a href="https://github.com/farisNassif/FourthYear_EmergingTechnologies/blob/master/README.md">README</a> or the <a href="https://github.com/farisNassif/FourthYear_EmergingTechnologies/blob/master/model_notebook/ModelCreation.ipynb">Jupyter Notebook</a>.</p>
+      </center>
+    </div>
+    <Br><Br><Br><Br><Br><Br><Br>
+    <p style="margin-bottom: 0px; text-align: right" style="font-size: 17px"><i>Faris Nassif | <a href="https://github.com/farisNassif/FourthYear_EmergingTechnologies">Source Code</a> <br> 4th Year | Emerging Technologies | GMIT</i></p>
+  </div>
 
-    
-<div class="col-lg-5 rounded" style="min-height: 125px; padding-right: 50px">
 </div>
-<p style="text-align: right" style="font-size: 17px"><i>Faris Nassif <br> 4th Year | Emerging Technologies | GMIT</i></p>
+</div>
 </body>
 {% endblock %}

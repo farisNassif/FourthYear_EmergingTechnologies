@@ -8,6 +8,8 @@ from cv2 import cv2
 import math
 # Local file used for various QoL functions
 import utilities as ut
+# Import which I will use for removing files when they're no longer necessary
+import os
 
 '''
 The main goal of this class and it's functions is 
@@ -68,12 +70,13 @@ def preprocess_image(img):
     # Need to now shift the image so that the digit's center of mass is centered appropriately
     shiftX, shiftY = get_best_shift(img)
     shifted = shift(img, shiftX, shiftY)
-    img = shifted
 
     # Before the image is returned to be predicted the values must be inverted and reshaped
-    img = ut.invert_values(img/255).reshape((1, 28, 28, 1))
+    processed_image = ut.invert_values(shifted/255).reshape((1, 28, 28, 1))
 
-    return img
+    # Cleaning up the directory before the processed image has returned
+    # os.remove("demofile.txt")
+    return processed_image
 
 # Calculate how to shift an image of a digit so that its center of mass is nicely centered.
 def get_best_shift(img):

@@ -23,55 +23,55 @@ def createAndSaveModel():
     """ First CONV => POOL Layer """
     # A 2d convolution layer allows spatial convolution over images
     # Creates a convolution kernel (small matrix) 
-    model.add(Conv2D(200, # 32 represents the amount of filters 
+    model.add(Conv2D(32, # 32 represents the amount of filters 
                 kernel_size=(5, 5), # Kernel_size 2 integers specifying width and height of the convolution window (5x5)  
                 padding='same', # Zero padding
                 activation='relu', # Relu worked best with my model https://datascience.stackexchange.com/questions/18667/relu-vs-sigmoid-in-mnist-example
                 input_shape=mb.input_shape)) # Passed in value is equal to (28, 28, 1), same value as that of images to pass into the model
-    
     # Used for downsampling the image size
     # Eg. in a (2,2) pool it splits a pixel image into 4 chucks and takes the 4 highest values from each chunk
     model.add(MaxPooling2D(pool_size=(2, 2))) 
 
     """ Second CONV => POOL Layer """
-    # This time add another convolution layer with slightly different paramaters 
-    model.add(Conv2D(100, 
-                    (3, 3), 
+    # This time add another convolution layer with slightly different paramaters
+    model.add(Conv2D(15, 
+                    (3, 3),
+                    padding='same', 
                     activation='relu')) 
-
-    # Used for downsampling the image size
     model.add(MaxPooling2D(pool_size=(2, 2)))   
 
-    # Dropout causes my model to crash when loaded, no choice but to exclude it
+    # No choice but to exclude Dropout - https://github.com/farisNassif/FourthYear_EmergingTechnologies/issues/4
     # model.add(Dropout(0.2))
 
     """ Fully Connected Layer """
+    # Fully connected layers connect every node in the previous layer with every node in the successive layer
     # Flattens the 2D arrays for fully connected layers
     model.add(Flatten())  
-    # Apply a dense layer with a output of 500 (nodes)
-    model.add(Dense(100, 
+    # Apply a dense layer with a output of 128 (nodes)
+    model.add(Dense(128, 
                 activation='relu'))
-
     model.add(Dense(50, 
                 activation='relu'))
-
     # Apply a final dense layer with a output of 10 
     # Softmax is applied to the final layer as it can be used to represent catagorical data, outputing results ranging from 0 upto 1
     model.add(Dense(mb.CONST_NUM_CLASSES, 
                     activation='softmax'))
+
+    """ Compile the Model """         
     # Compile the model before training
     model.compile(loss=keras.losses.categorical_crossentropy, # Loss function -> Measures how accurate the model is during training
                 optimizer='adam', # Optimizer -> How the model is updated based on the data it sees and its loss function.
                 metrics=['accuracy']) # Metrics -> Used to monitor the training and testing steps
 
+    """ Train the Model """
     # Train the model. Training it requires..
     # 1) Feeding the model with the trained_images and trained_labels
     # 2) The model learns association between the images and labels
     # 3) Ask the model to make predictions about a test set. Verify the predictions match the labls from the test_labels array          
     model.fit(mb.train_images, mb.train_labels, # Training images and labels
               validation_data=(mb.test_images, mb.test_labels), # Evaluate the loss and any model metrics at the end of each epoch
-              batch_size=100, # Too large a mini-batch size usually leads to a lower accuracy
-              epochs=10, # Number of iterations
+              batch_size=128, # Too large a mini-batch size usually leads to a lower accuracy
+              epochs=20, # Number of iterations
               verbose=1) # Provides a progress bar when training
 
     # Compare how the model performs on the test dataset

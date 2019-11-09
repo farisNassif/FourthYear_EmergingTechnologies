@@ -92,7 +92,8 @@ $( document ).ready(function() {
         url:"/upload",
         data:{ imageBase64:dataURL }
         }).done(function(predictedNumber){
-            document.getElementById('mytext').value = predictedNumber;
+            predictedNumber = JSON.parse(predictedNumber)
+            $('.prediction').text(predictedNumber)
             console.log(predictedNumber);
         });
   }

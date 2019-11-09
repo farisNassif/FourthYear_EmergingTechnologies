@@ -16,10 +16,10 @@ from PIL import Image
 app = Flask(__name__)
 app._static_folder = os.path.abspath("templates/static/")
 
-# Index route so when I browse to the url it doesn't 404
-@app.route('/', methods=['Post', 'GET'])
+# Index route
+@app.route('/', methods=['GET'])
 def index():
-    title = 'Draw a Digit!'
+    title = 'Draw a Digit on the Canvas!'
     # Base Page
     return render_template('layouts/index.html',
                        title=title)
