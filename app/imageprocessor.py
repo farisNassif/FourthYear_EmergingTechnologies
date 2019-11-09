@@ -1,18 +1,13 @@
 # Helper libraries
 import numpy as np
-# Used for reading/helping process the image
-from PIL import Image
-from PIL import ImageOps as io
 # Required for multi-dimensional image processing
 from scipy import ndimage
 # Required for image manipulation 
 from cv2 import cv2
 # Math is needed for fitting the image after downsizing it to 20x20
 import math
-# Local base file
-import mnistbase as mb
-# For deleting image after it's been processed
-import os
+# Local file used for various QoL functions
+import utilities as ut
 
 '''
 The main goal of this class and it's functions is 
@@ -20,11 +15,10 @@ to processes the canvas images in the same way
 that MNIST dataset images were processed.
 
 Comments within the functions should provide an insight into how that function behaves.
-Adapted from http://opensourc.es/blog/tensorflow-mnist
-'''
 
-# Adapted from https://stackoverflow.com/questions/41563720/error-when-checking-model-input-expected-convolution2d-input-1-to-have-4-dimens
-# https://arrow.dit.ie/cgi/viewcontent.cgi?article=1190&context=scschcomdis - 3.8.1 Normalization and Reshape Data
+Adapted from - http://opensourc.es/blog/tensorflow-mnist
+3.8.1 Normalization and Reshape Data (Up to and including 4.3) - https://arrow.dit.ie/cgi/viewcontent.cgi?article=1190&context=scschcomdis
+'''
 
 # Takes in a black and white canvas image and processes it 
 def preprocess_image(img):
@@ -75,6 +69,10 @@ def preprocess_image(img):
     shiftX, shiftY = get_best_shift(img)
     shifted = shift(img, shiftX, shiftY)
     img = shifted
+
+    # Before the image is returned to be predicted the values must be inverted and reshaped
+    img = ut.invert_values(img/255).reshape((1, 28, 28, 1))
+
     return img
 
 # Calculate how to shift an image of a digit so that its center of mass is nicely centered.

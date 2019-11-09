@@ -3,8 +3,9 @@ from PIL import Image
 from PIL import ImageOps as io
 
 """
-This Class contains utility functions that can TODO
+This Class contains utility functions that don't fit in any other class without causing clutter.
 
+Comments within the functions should provide an insight into how that function behaves.
 """
 
 # Takes in an image and processes it accordingly before transforming it into an array
@@ -24,7 +25,7 @@ def image_to_array(image):
     # When processed from the canvas, background is completely black, want a black number on a white background
     # TODO => Work without saving the image
     alpha_composite = Image.alpha_composite(background, sized)
-    alpha_composite.save('toArray', 'PNG', quality=80)
+    alpha_composite.save('toArray.png', 'PNG', quality=80)
 
     # Loads the image as greyscale
     image_array = cv2.imread("toArray.png", cv2.IMREAD_GRAYSCALE)
@@ -41,7 +42,7 @@ def invert_values(image_array):
 
     # Inverts the values within the array { x => 1 - x } => E.G => { 0.4 = 1 - 0.4 } => x is now 0.6
     for i in range(array_flattened.size):
-        array_flattened[i] = 1 - image_array[i]
+        array_flattened[i] = 1 - array_flattened[i]
 
     # Return the altered array with the same shape it had before
     return array_flattened.reshape(image_array.shape)

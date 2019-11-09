@@ -11,6 +11,8 @@ import imageprocessor as ip
 import mnistbase as mb
 # Local file used to create model
 import createmodel as cm
+# Local file used for various QoL functions
+import utilities as ut
 
 
 """
@@ -21,12 +23,13 @@ If no model is found (Saved) then a new one will be created and saved, the progr
 """
 
 def predict(image):
-  # Process, resize, flatten the image etc
-  processedImage = ip.processImage(image)
+  # Taking the canvas image and converting it to an array for pre-processing (This is passed as a param to preprocess)
+  # Then process, resize, flatten the image so that it resembels an MNIST dataset image
+  processedImage = ip.preprocess_image(ut.image_to_array(image))
   # Pass the processed image to the model
-  predictions = loaded_model.predict(processedImage)
+  prediction = loaded_model.predict(processedImage)
   # Return the prediction
-  return np.argmax(predictions[0])
+  return np.argmax(prediction[0])
 
 # Try load a saved model and its weights otherwise create a new one and save it
 # Adapted from: https://stackoverflow.com/questions/35074549/how-to-load-a-model-from-an-hdf5-file-in-keras
@@ -45,6 +48,7 @@ try:
   # Define X_test & Y_test data first
   loaded_model.compile(loss=keras.losses.categorical_crossentropy, optimizer='adam', metrics=['accuracy'])
   score = loaded_model.evaluate(mb.test_images, mb.test_labels, verbose=0)
+  # Print accuracy etc  
   print ("%s: %.2f%%" % (loaded_model.metrics_names[1], score[1]*100))
 except:
   # In the case a model wasn't found, make a new one!

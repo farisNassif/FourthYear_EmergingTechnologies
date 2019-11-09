@@ -40,8 +40,10 @@ def upload():
     inMemorySave = io.BytesIO(decoded)
     # Image in memory still needs to be opened before sent to be processed
     predictMe = Image.open(inMemorySave)
-    # Pass the image and receive back a prediction
+
+    # Pass the image to be processed and predicted
     res = rm.predict(predictMe)
+
     print("Prediction: " + str(res))
     return str(res)
 
