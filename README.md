@@ -1,6 +1,9 @@
-# Digit Recogniser Assignment - Emerging Technologies 2019
+<h1 A Neural Network for Recognising Mouse-Drawn digits with Keras, OpenCV and MNIST </h1>
 
-> Student: Faris Nassif, G00347032
+<p align="center">
+  <img src = "https://i.imgur.com/TVplbBp.gif">
+</p>
+
 
 > Subject: Emerging Technologies (4th Year) 2019<br>
 > Lecturer: Dr Ian McLoughlin<br>
