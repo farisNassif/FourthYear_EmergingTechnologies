@@ -27,7 +27,7 @@ $( document ).ready(function() {
         mouse.y = e.offsetY;
       }
     });    
- 
+    
     /* While the mouse is pressed down and moving, draw, otherwise return */
     canvas.onmousemove = function(e) {
       /* If nobody is drawing */
@@ -39,6 +39,7 @@ $( document ).ready(function() {
       var x = e.pageX - this.offsetLeft;
       var y = e.pageY - this.offsetTop;
     };
+
 
     /* The two methods below are controllers, knowing when to draw and when to stop */
     canvas.addEventListener('mousedown', function(e) {
@@ -64,6 +65,7 @@ $( document ).ready(function() {
       ctx.strokeStyle = 'black';
     };
   } 
+
   
   /* Canvas creation method, creates canvas object */
   function createCanvas(parent, width, height) {

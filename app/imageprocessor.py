@@ -75,7 +75,7 @@ def preprocess_image(img):
     processed_image = ut.invert_values(shifted/255).reshape((1, 28, 28, 1))
 
     # Cleaning up the directory before the processed image has returned
-    # os.remove("demofile.txt")
+    os.remove("toArray.png")
     return processed_image
 
 # Calculate how to shift an image of a digit so that its center of mass is nicely centered.
