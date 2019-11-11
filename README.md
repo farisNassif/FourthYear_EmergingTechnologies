@@ -4,8 +4,9 @@
 
 ## Project Details
 
-|Details  |       |
+|Details  |    |
 | --- | --- |
+| **Link** | [Website](https://mnist-python-digit-prediction.herokuapp.com/)
 | **Project**  | [Project Spec](https://github.com/ianmcloughlin/project-2019-emtech/blob/master/project.pdf) 
 | **Course** | BSc (Hons) in Software Development
 | **Module** |  Emerging Technologies |
@@ -42,7 +43,8 @@ In order to run the program on your machine, you must have the following install
 2. Navigate to the <b> \app\ </b> directory, `cd app`
 3. Run the program from <b>runner.py</b>, `python runner.py`
 
-Upon running you should be able to access the Web Application on `http://127.0.0.1:5000/`
+Upon running you should be able to access the Web Application on `http://127.0.0.1:5000/`<br>
+If you just want to try out the program without going through the chore of installing and running it you can [here](https://mnist-python-digit-prediction.herokuapp.com/)
 
 <i> If for any reason after Step 3 you encounter errors after running, the most common issue would be missing imports, to solve this look for what import it says is missing and type `pip install whateverthatimportis`</i>
 
