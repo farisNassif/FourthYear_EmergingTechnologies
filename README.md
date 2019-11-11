@@ -17,9 +17,8 @@
 ## Contents
 * [Project Outline](#project-outline)
 * [Running the Program](#running-the-program)
-* [Design and Technologies](https://github.com) 
-* [Software](#Software)
-* [Resources](https://github.com)
+* [Design and Technologies](#design-and-technologies) 
+* [Resources](#resources)
 
 ## Project Outline
 1. Create a Flask web application that allows users to draw digits on a Canvas.
@@ -50,7 +49,7 @@ Upon running you should be able to access the Web Application on `http://127.0.0
 
 ## Design and Technologies
 ### Neural Network
-The [Neural Network Model](https://github.com/farisNassif/FourthYear_EmergingTechnologies/blob/master/model_notebook/ModelCreation.ipynb) is the crux of this project. The creation is made possible thanks to [Keras](https://keras.io/) which is a High-Level Neural Network API. The model itself isn't complicated thanks to Keras which encapsulates a lot of the specificities and awkward parts of developing a Model.
+The [Neural Network Model](https://github.com/farisNassif/FourthYear_EmergingTechnologies/blob/master/model_notebook/ModelCreation.ipynb) is the crux of this project. The creation is made possible thanks to [Keras](https://keras.io/), a High-Level Neural Network API. The model itself isn't complicated thanks to Keras which encapsulates from the user a lot of the specificities and awkward parts of developing a Model.
 
 The Model for this project has an accuracy of 99.16% making it highly accurate when tested against similar MNIST hand-written digits, however not too accurate when tested against unprocessed Canvas drawn digits, something I'll discuss when I break down the Backend. 
 
@@ -69,3 +68,5 @@ Once processed the image is then compared against the previously trained Model, 
 <p align="center">
   <img src = "https://i.imgur.com/MhecSHY.gif">
 </p>
+
+todo: conclusion, problems with project, add proper header img, proof read and fine tune before deadline
