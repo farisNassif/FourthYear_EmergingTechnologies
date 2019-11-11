@@ -1,0 +1,9 @@
+Open your CLI and navigate to the the project directory and directly paste the below lines.
+
+pip install flask
+pip install keras
+pip install tensorflow
+pip install simplejson
+pip install opencv-python
+pip install pillow 
+pip install graphviz

@@ -6,8 +6,8 @@
 
 |Details  |    |
 | --- | --- |
-| **Link** | [Website](https://mnist-python-digit-prediction.herokuapp.com/)
 | **Project**  | [Project Spec](https://github.com/ianmcloughlin/project-2019-emtech/blob/master/project.pdf) 
+| **Link** | [Website](https://mnist-python-digit-prediction.herokuapp.com/)
 | **Course** | BSc (Hons) in Software Development
 | **Module** |  Emerging Technologies |
 | **College** | [GMIT](http://www.gmit.ie/) 
@@ -39,9 +39,11 @@ In order to run the program on your machine, you must have the following install
 * [OpenCV 2.4.5](https://www.pyimagesearch.com/2018/09/19/pip-install-opencv/) (Or Above)
 * [Keras 2.3.0](https://keras.io/)
 
-1. In your command line terminal, `git clone https://github.com/farisNassif/FourthYear_EmergingTechnologies`
-2. Navigate to the <b> \app\ </b> directory, `cd app`
-3. Run the program from <b>runner.py</b>, `python runner.py`
+A handful of imports is also required, you can find those [here](https://github.com/farisNassif/FourthYear_EmergingTechnologies/tree/master/rough_work/Neural_Network_1_Clothing%20Items/required_imports.txt).
+
+1. In your command line terminal: `git clone https://github.com/farisNassif/FourthYear_EmergingTechnologies`
+2. Navigate to the <b> \app\ </b> directory: `cd app`
+3. Run the program from <b>runner.py</b>: `python runner.py`
 
 Upon running you should be able to access the Web Application on `http://127.0.0.1:5000/`<br>
 If you just want to try out the program without going through the chore of installing and running it you can [here](https://mnist-python-digit-prediction.herokuapp.com/)
