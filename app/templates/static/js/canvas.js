@@ -13,34 +13,46 @@ $( document ).ready(function() {
     
     /* Variables used for mouse/position getters */
     var mouse = {x: 0, y: 0};
+    var touch = {x: 0, y: 0};
     var last_mouse = {x: 0, y: 0};
+    var last_touch = {x: 0, y: 0};
 
     /* For capturing the position of the mouse */
     canvas.addEventListener('mousemove', function(e) {
       last_mouse.x = mouse.x;
       last_mouse.y = mouse.y;
               
-      /* Modified this to avoid problems with
-         scrolling the page */
+      /* Handles mouse offset */
       if (e.offsetX) {
         mouse.x = e.offsetX;
         mouse.y = e.offsetY;
       }
     });    
+
+    /* For capturing the position of the touch */
+    canvas.addEventListener('touchmove', function(e) {
+      var touch = e.touches[0];
+      last_touch.x = e.pageX - touch.offsetLeft;
+      last_touch.y = e.pageY - touch.offsetTop;
+                      
+      /* Handles touch offset */
+      if (e.offsetX) {
+        touch.x = e.offsetX;
+        touch.y = e.offsetY;
+      }
+    });  
     
     /* While the mouse is pressed down and moving, draw, otherwise return */
     canvas.onmousemove = function(e) {
-      /* If nobody is drawing */
-      if (!canvas.isDrawing) {
-        return;
-      }
-
       /* Co-ordinate values for drawing */
       var x = e.pageX - this.offsetLeft;
       var y = e.pageY - this.offsetTop;
     };
 
-
+    canvas.addEventListener('touchstart', function(e) {
+      canvas.addEventListener('touchmove', onPaint, false);
+    }, false);
+    
     /* The two methods below are controllers, knowing when to draw and when to stop */
     canvas.addEventListener('mousedown', function(e) {
       canvas.addEventListener('mousemove', onPaint, false);

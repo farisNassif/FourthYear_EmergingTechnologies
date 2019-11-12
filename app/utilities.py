@@ -23,7 +23,6 @@ def image_to_array(image):
 
     # Apply the background to the alpha channel of the RGBA image
     # When processed from the canvas, background is completely black, want a black number on a white background
-    # TODO => Work without saving the image
     alpha_composite = Image.alpha_composite(background, sized)
     alpha_composite.save('toArray.png', 'PNG', quality=80)
 
