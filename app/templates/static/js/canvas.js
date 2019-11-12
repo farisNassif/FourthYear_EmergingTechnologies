@@ -50,7 +50,7 @@ $( document ).ready(function() {
     };
 
     canvas.addEventListener('touchstart', function(e) {
-      canvas.addEventListener('touchmove', onPaint, false);
+      canvas.addEventListener('touchmove', onTouchPaint, false);
     }, false);
     
     /* The two methods below are controllers, knowing when to draw and when to stop */
@@ -70,6 +70,22 @@ $( document ).ready(function() {
       ctx.closePath();
       ctx.stroke();
 
+      /* Draw on the Canvas */
+      ctx.lineWidth = 15 ;
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = 'black';
+    };
+
+    /* Same as mouse paint, but for touch */
+    var onTouchPaint = function() {
+      /* For plotting lines between touch movements */  
+      ctx.beginPath();
+      ctx.moveTo(last_touch.x, last_touch.y);
+      ctx.lineTo(touch.x, touch.y);
+      ctx.closePath();
+      ctx.stroke();
+    
       /* Draw on the Canvas */
       ctx.lineWidth = 15 ;
       ctx.lineJoin = 'round';
