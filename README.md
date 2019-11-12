@@ -16,10 +16,9 @@
 
 ## Contents
 * [Project Outline](#project-outline)
-* [Running the Program](running-the-program)
-* [Design](https://github.com) 
-* [Software](#Software)
-* [Resources](https://github.com)
+* [Running the Program](#running-the-program)
+* [Design and Technologies](#design-and-technologies) 
+* [Resources](#resources)
 
 ## Project Outline
 1. Create a Flask web application that allows users to draw digits on a Canvas.
@@ -39,39 +38,35 @@ In order to run the program on your machine, you must have the following install
 * [OpenCV 2.4.5](https://www.pyimagesearch.com/2018/09/19/pip-install-opencv/) (Or Above)
 * [Keras 2.3.0](https://keras.io/)
 
-A handful of imports is also required, you can find those [here](https://github.com/farisNassif/FourthYear_EmergingTechnologies/tree/master/rough_work/Neural_Network_1_Clothing%20Items/required_imports.txt).
+A handful of imports is also required, you can find those [here](https://github.com/farisNassif/FourthYear_EmergingTechnologies/blob/master/rough_work/required_imports.txt).
 
 1. In your command line terminal: `git clone https://github.com/farisNassif/FourthYear_EmergingTechnologies`
 2. Navigate to the <b> \app\ </b> directory: `cd app`
 3. Run the program from <b>runner.py</b>: `python runner.py`
 
-Upon running you should be able to access the Web Application on `http://127.0.0.1:5000/`<br>
-If you just want to try out the program without going through the chore of installing and running it you can [here](https://mnist-python-digit-prediction.herokuapp.com/)
+Upon running you should be able to access the Web Application on `http://127.0.0.1:5000/`.<br>
+<i>If you just want to try out the program without going through the chore of installing and running it you can [here](https://mnist-python-digit-prediction.herokuapp.com/)</i>.
 
-<i> If for any reason after Step 3 you encounter errors after running, the most common issue would be missing imports, to solve this look for what import it says is missing and type `pip install whateverthatimportis`</i>
+## Design and Technologies
+### Neural Network
+The [Neural Network Model](https://github.com/farisNassif/FourthYear_EmergingTechnologies/blob/master/model_notebook/ModelCreation.ipynb) is the crux of this project. The creation is made possible thanks to [Keras](https://keras.io/), a High-Level Neural Network API. The model itself isn't complicated thanks to Keras which encapsulates from the user a lot of the specificities and awkward parts of developing a Model.
 
+The Model for this project has an accuracy of 99.16% making it highly accurate when tested against similar MNIST hand-written digits, however not too accurate when tested against unprocessed Canvas drawn digits, something I'll discuss when I break down the Backend. 
 
+### Frontend
+The web application is essentially a Single Page Application that communicates with the backend via [Flask](https://www.palletsprojects.com/p/flask/). 
 
-~Give a brief rundown of what is asked from the project<br>
-~Outline of work eg. 'Create web app, users can draw on the page, submit the drawing and see if it's recognised'<br>
-~How to run the project and it's requirements<br>
-~Training the model<br>
-~Accuracy of the model<br>
-~Screenshots or a gif showing the project in action<br>
-~Problems in the project<br>
-~What I would change<br>
-~Conclusion<br>
+The Frontend consists of a combination of HTML/Javascript/[Bootstrap](https://getbootstrap.com/) and [Jquery](https://jquery.com/). 
 
-**TODO
-clean up code majorly
-have the drawn image saved or output or something
-once thats done have it predicted
-add comments 
-add research notes
-fix up canvas
-make it work on any touch screen device
-..
+The user may draw a number (or anything really) on the canvas and 'Publish' their drawing. The drawing is sent to the backend via an [Ajax](https://api.jquery.com/jquery.ajax/) request. The drawing is transported as an [Encoded Base64](https://docs.python.org/2/library/base64.html) String which must be decoded, processed, compared against the trained Model which will return a prediction to the Frontend.
+
+### Backend
+Upon receiving the Base64 String it gets decoded into a .PNG image via the [Base64](https://docs.python.org/2/library/base64.html) Python module. The image is then stored in memory and processed with help from the [Pillow](https://pillow.readthedocs.io/en/stable/) module. The image needs to be pre-processed as an MNIST Dataset image would be processed otherwise the predictions will be largely inaccurate. I accomplished this with help from [OpenCV](https://opencv.org/). Images were converted into arrays and had to be reshaped into 20x20 images and then centered onto a 28x28 background, ensuring the digit's center of mass was centered appropriately.
+
+Once processed the image is then compared against the previously trained Model, which returns a result. The result is then returned from Flask to the Frontend and displayed via the DOM to the user.
 
 <p align="center">
-  <img src = "https://i.imgur.com/TVplbBp.gif">
+  <img src = "https://i.imgur.com/MhecSHY.gif">
 </p>
+
+todo: conclusion, problems with project, add proper header img, proof read and fine tune before deadline
