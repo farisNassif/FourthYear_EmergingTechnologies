@@ -1,4 +1,6 @@
-![emergingtech](https://user-images.githubusercontent.com/22448079/47147656-9f228f80-d2c6-11e8-846a-aa6a9a88ffef.png)
+<p align="center">
+  <img src = "https://i.imgur.com/fVVeh6U.png">
+</p>
 
 <h3 align="center">A Neural Network for Predicting User-Drawn digits with Keras, OpenCV, Flask and MNIST </h3>
 
@@ -68,5 +70,5 @@ Once processed the image is then compared against the previously trained Model, 
 <p align="center">
   <img src = "https://i.imgur.com/MhecSHY.gif">
 </p>
-
+https://i.imgur.com/fVVeh6U.png
 todo: conclusion, problems with project, add proper header img, proof read and fine tune before deadline
