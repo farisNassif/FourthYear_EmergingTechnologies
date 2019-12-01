@@ -7,7 +7,9 @@
 |Details  |    |
 | --- | --- |
 | **Project**  | [Project Spec](https://github.com/ianmcloughlin/project-2019-emtech/blob/master/project.pdf) 
-| **Link** | [Website](https://mnist-python-digit-prediction.herokuapp.com/)
+| **Host** | [Website](https://mnist-python-digit-prediction.herokuapp.com/)
+| **Screencast** | [Project Rundown](www.youtube.com)
+| **GIF** | [Project Running](https://i.imgur.com/MhecSHY.gif)
 | **Course** | BSc (Hons) in Software Development
 | **Module** |  Emerging Technologies |
 | **College** | [GMIT](http://www.gmit.ie/) 
@@ -65,8 +67,7 @@ Upon receiving the Base64 String it gets decoded into a .PNG image via the [Base
 
 Once processed the image is then compared against the previously trained Model, which returns a result. The result is then returned from Flask to the Frontend and displayed via the DOM to the user.
 
-<p align="center">
-  <img src = "https://i.imgur.com/MhecSHY.gif">
-</p>
+### Final Thoughts
+The project turned out to be one I genuinely enjoyed working on and hope it's evident from the amount of work put into it. I implemented as much additional functionality as I could while keeping the project itself simple to use and user friendly and true to the specification. <br>
 
-todo: conclusion, problems with project, add proper header img, proof read and fine tune before deadline
+All references are documented within relevant classes and notebook and major issues (both closed and open) were [documented](https://github.com/farisNassif/FourthYear_EmergingTechnologies/issues).

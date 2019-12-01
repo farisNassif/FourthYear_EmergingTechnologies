@@ -1,5 +1,5 @@
 # Flask imports and helpers
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request
 # Used for building paths
 import os
 # Local file for running the model
@@ -12,6 +12,10 @@ import re
 import io 
 # Used for opening the image in memory
 from PIL import Image
+
+'''
+TODO Give a rundown of the class
+'''
 
 app = Flask(__name__)
 app._static_folder = os.path.abspath("templates/static/")
@@ -35,7 +39,7 @@ def upload():
     base64_data = re.sub('^data:image/.+;base64,', '', image_b64)
 
     # Decode the data
-    decoded=base64.b64decode(base64_data)
+    decoded = base64.b64decode(base64_data)
     # In memory binary stream for the image received. https://docs.python.org/3/library/io.html
     inMemorySave = io.BytesIO(decoded)
     # Image in memory still needs to be opened before sent to be processed

@@ -3,7 +3,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 # Keras import and relevant modules
 import keras
 from keras.layers.core import Dense, Activation, Dropout, Flatten
-from keras.layers.convolutional import Conv2D, MaxPooling2D
+from keras.layers.convolutional import Conv2D, MaxPooling2D 
 # For saving the model and weights
 import simplejson as json
 # Local base file
@@ -81,7 +81,8 @@ def createAndSaveModel():
     plot_model(model, to_file='model.png')
 
     """ Save the model """
-    # Serialize to JSON
+    # Serialize to JSON=
+    
     json_file = model.to_json()
     with open("../saved_model/SavedModel.json", "w") as file:
         file.write(json.dumps(json.loads(json_file), indent=4))

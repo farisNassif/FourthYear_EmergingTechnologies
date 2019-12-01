@@ -79,6 +79,7 @@ def preprocess_image(img):
     return processed_image
 
 # Calculate how to shift an image of a digit so that its center of mass is nicely centered.
+# This function calculates while shift() implements.
 def get_best_shift(img):
     # Calculate center of mass
     x, y = ndimage.measurements.center_of_mass(img)
@@ -90,7 +91,7 @@ def get_best_shift(img):
 
     return shiftx, shifty
 
-# Shifts an image by some offsets
+# Shifts an image by some offsets based on the calculations from get_best_shift()
 def shift(img, sx, sy):
     # Generate warping transformation matrix to shift the image
     # https://docs.opencv.org/master/da/d6e/tutorial_py_geometric_transformations.html#gsc.tab=0

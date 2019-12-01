@@ -28,7 +28,7 @@ $( document ).ready(function() {
         mouse.y = e.offsetY;
       }
     });    
-
+    
     /* For capturing the position of the touch */
     canvas.addEventListener('touchmove', function(e) {
       var touch = e.touches[0];
@@ -115,8 +115,10 @@ $( document ).ready(function() {
     /* Get the canvas */
     var canvas = document.getElementById("canvas");
     var dataURL=canvas.toDataURL();
+    canvas.toda
   
     /* Asynchronous JS and XML post for the backend */
+    /* https://stackoverflow.com/questions/54168580/sending-image-from-html-canvas-to-flask-python-not-working */
     $.ajax({
         type:"POST",
         url:"/upload",
