@@ -1,4 +1,6 @@
-![emergingtech](https://user-images.githubusercontent.com/22448079/47147656-9f228f80-d2c6-11e8-846a-aa6a9a88ffef.png)
+<p align="center">
+  <img src = "https://camo.githubusercontent.com/a3c08b433cad6c0ed97fa87f6fbf6d84bd0a9458/68747470733a2f2f692e696d6775722e636f6d2f665656656836552e706e67">
+</p>
 
 <h3 align="center">A Neural Network for Predicting User-Drawn digits with Keras, OpenCV, Flask and MNIST </h3>
 
@@ -67,7 +69,15 @@ Upon receiving the Base64 String it gets decoded into a .PNG image via the [Base
 
 Once processed the image is then compared against the previously trained Model, which returns a result. The result is then returned from Flask to the Frontend and displayed via the DOM to the user.
 
+<<<<<<< HEAD
 ### Final Thoughts
 The project turned out to be one I genuinely enjoyed working on and hope it's evident from the amount of work put into it. I implemented as much additional functionality as I could while keeping the project itself simple to use and user friendly and true to the specification. <br>
 
 All references are documented within relevant classes and notebook and major issues (both closed and open) were [documented](https://github.com/farisNassif/FourthYear_EmergingTechnologies/issues).
+=======
+<p align="center">
+  <img src = "https://i.imgur.com/MhecSHY.gif">
+</p>
+https://i.imgur.com/fVVeh6U.png
+todo: conclusion, problems with project, add proper header img, proof read and fine tune before deadline
+>>>>>>> 8df741df2a7975388f55c472ac2a2aaee53d483d
