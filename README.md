@@ -14,7 +14,6 @@
 | **GIF** | [Project Running](https://i.imgur.com/MhecSHY.gif)
 | **Course** | BSc (Hons) in Software Development
 | **Module** |  Emerging Technologies |
-| **College** | [GMIT](http://www.gmit.ie/) 
 | **Author** | [Faris Nassif](https://github.com/farisNassif) |
 | **Lecturer** | Dr Ian McLoughlin|
 
@@ -69,15 +68,7 @@ Upon receiving the Base64 String it gets decoded into a .PNG image via the [Base
 
 Once processed the image is then compared against the previously trained Model, which returns a result. The result is then returned from Flask to the Frontend and displayed via the DOM to the user.
 
-<<<<<<< HEAD
 ### Final Thoughts
 The project turned out to be one I genuinely enjoyed working on and hope it's evident from the amount of work put into it. I implemented as much additional functionality as I could while keeping the project itself simple to use and user friendly and true to the specification. <br>
 
 All references are documented within relevant classes and notebook and major issues (both closed and open) were [documented](https://github.com/farisNassif/FourthYear_EmergingTechnologies/issues).
-=======
-<p align="center">
-  <img src = "https://i.imgur.com/MhecSHY.gif">
-</p>
-https://i.imgur.com/fVVeh6U.png
-todo: conclusion, problems with project, add proper header img, proof read and fine tune before deadline
->>>>>>> 8df741df2a7975388f55c472ac2a2aaee53d483d
