@@ -14,6 +14,7 @@ $( document ).ready(function() {
     /* Variables used for mouse/position getters */
     var mouse = {x: 0, y: 0};
     var touch = {x: 0, y: 0};
+    /* Variables used for mouse/position getters */
     var last_mouse = {x: 0, y: 0};
     var last_touch = {x: 0, y: 0};
 
