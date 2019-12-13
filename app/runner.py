@@ -13,11 +13,15 @@ import io
 # Used for opening the image in memory
 from PIL import Image
 
-'''
-TODO Give a rundown of the class
-'''
+"""
+The Purpose of this class is to run the Flask Server (On port 5000).
+
+This Class also handles GET/POST requests and saves the drawn canvas image
+in memory which it then passes to delegate classes to process and predict.
+"""
 
 app = Flask(__name__)
+# Defining the static folder path
 app._static_folder = os.path.abspath("templates/static/")
 
 # Index route
