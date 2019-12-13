@@ -10,7 +10,6 @@
 | --- | --- |
 | **Project**  | [Project Spec](https://github.com/ianmcloughlin/project-2019-emtech/blob/master/project.pdf) 
 | **Host** | [Website](https://mnist-python-digit-prediction.herokuapp.com/)
-| **Screencast** | [Project Rundown](www.youtube.com)
 | **GIF** | [Project Running](https://i.imgur.com/MhecSHY.gif)
 | **Course** | BSc (Hons) in Software Development
 | **Module** |  Emerging Technologies |
@@ -21,7 +20,7 @@
 * [Project Outline](#project-outline)
 * [Running the Program](#running-the-program)
 * [Design and Technologies](#design-and-technologies) 
-* [Resources](#resources)
+* [Final Thoughts](#final-thoughts)
 
 ## Project Outline
 1. Create a Flask web application that allows users to draw digits on a Canvas.
@@ -48,6 +47,7 @@ A handful of imports is also required, you can find those [here](https://github.
 3. Run the program from <b>runner.py</b>: `python runner.py`
 
 Upon running you should be able to access the Web Application on `http://127.0.0.1:5000/`.<br>
+
 <i>If you just want to try out the program without going through the chore of installing and running it you can [here](https://mnist-python-digit-prediction.herokuapp.com/)</i>.
 
 ## Design and Technologies
