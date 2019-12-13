@@ -1,5 +1,5 @@
 <p align="center">
-  <img src = "https://camo.githubusercontent.com/a3c08b433cad6c0ed97fa87f6fbf6d84bd0a9458/68747470733a2f2f692e696d6775722e636f6d2f665656656836552e706e67">
+  <img src = "https://i.imgur.com/8gaJkhY.png">
 </p>
 
 <h3 align="center">A Neural Network for Predicting User-Drawn digits with Keras, OpenCV, Flask and MNIST </h3>
